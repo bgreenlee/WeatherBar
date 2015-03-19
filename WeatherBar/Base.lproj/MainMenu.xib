@@ -11,17 +11,18 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="WeatherBar" customModuleProvider="target">
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="WeatherBar" customModuleProvider="target"/>
+        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <customObject id="E63-qH-n1m" userLabel="StatusMenuController" customClass="StatusMenuController" customModule="WeatherBar" customModuleProvider="target">
             <connections>
-                <outlet property="statusMenu" destination="5zQ-rZ-NDc" id="XZv-IH-nJL"/>
+                <outlet property="statusMenu" destination="5zQ-rZ-NDc" id="cQi-Rx-ooj"/>
             </connections>
         </customObject>
-        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu id="5zQ-rZ-NDc">
             <items>
                 <menuItem title="Quit" keyEquivalent="q" id="6T6-uD-0eI">
                     <connections>
-                        <action selector="quitClicked:" target="Voe-Tx-rLC" id="c5L-O5-kUw"/>
+                        <action selector="quitClicked:" target="E63-qH-n1m" id="rqb-nY-8Z4"/>
                     </connections>
                 </menuItem>
             </items>

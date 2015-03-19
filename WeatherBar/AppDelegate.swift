@@ -10,23 +10,12 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    @IBOutlet weak var statusMenu: NSMenu!
-    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1) // NSVariableStatusItemLength
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        let icon = NSImage(named: "statusIcon")
-        icon?.setTemplate(true) // best for dark mode
-        statusItem.image = icon
-        statusItem.menu = statusMenu
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
-    }
-
-    @IBAction func quitClicked(sender: NSMenuItem) {
-        NSApplication.sharedApplication().terminate(self)
     }
 }
 

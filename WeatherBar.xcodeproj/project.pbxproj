@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A28F6DD51ABB48FD00DD196E /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F6DD41ABB48FD00DD196E /* StatusMenuController.swift */; };
 		A2A59C5E1ABB31560030BB74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A59C5D1ABB31560030BB74 /* AppDelegate.swift */; };
 		A2A59C601ABB31560030BB74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2A59C5F1ABB31560030BB74 /* Images.xcassets */; };
 		A2A59C631ABB31560030BB74 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2A59C611ABB31560030BB74 /* MainMenu.xib */; };
@@ -24,6 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A28F6DD41ABB48FD00DD196E /* StatusMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		A2A59C581ABB31560030BB74 /* WeatherBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A59C5C1ABB31560030BB74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2A59C5D1ABB31560030BB74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,8 +76,9 @@
 			isa = PBXGroup;
 			children = (
 				A2A59C5D1ABB31560030BB74 /* AppDelegate.swift */,
-				A2A59C5F1ABB31560030BB74 /* Images.xcassets */,
+				A28F6DD41ABB48FD00DD196E /* StatusMenuController.swift */,
 				A2A59C611ABB31560030BB74 /* MainMenu.xib */,
+				A2A59C5F1ABB31560030BB74 /* Images.xcassets */,
 				A2A59C5B1ABB31560030BB74 /* Supporting Files */,
 			);
 			path = WeatherBar;
@@ -205,6 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A28F6DD51ABB48FD00DD196E /* StatusMenuController.swift in Sources */,
 				A2A59C5E1ABB31560030BB74 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
