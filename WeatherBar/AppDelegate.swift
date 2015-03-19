@@ -15,7 +15,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1) // NSVariableStatusItemLength
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        statusItem.title = "WeatherBar"
+        let icon = NSImage(named: "statusIcon")
+        icon?.setTemplate(true) // best for dark mode
+        statusItem.image = icon
         statusItem.menu = statusMenu
     }
 
