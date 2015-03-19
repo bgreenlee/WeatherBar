@@ -21,13 +21,14 @@ struct Weather: Printable {
 class WeatherAPI {
     let BASE_URL = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q="
 
-    func fetchWeather(query: String) {
+    func fetchWeather(query: String, success: (Weather) -> Void) {
         let session = NSURLSession.sharedSession()
         let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         let url = NSURL(string: BASE_URL + escapedQuery!)
         let task = session.dataTaskWithURL(url!) { data, response, error in
-            let weather = self.weatherFromJSONData(data)
-            NSLog("\(weather)")
+            if let weather = self.weatherFromJSONData(data) {
+                success(weather)
+            }
         }
         task.resume()
     }
