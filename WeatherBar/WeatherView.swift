@@ -16,5 +16,6 @@ class WeatherView: NSView {
     func update(weather: Weather) {
         cityTextField.stringValue = weather.city
         currentConditionsTextField.stringValue = "\(Int(weather.currentTemp))°F and \(weather.conditions)"
+        imageView.image = NSImage(named: weather.icon)
     }
 }
