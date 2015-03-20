@@ -1,0 +1,3 @@
+highlighter: rouge
+markdown: kramdown
+exclude: ["WeatherBar.xcodeproj"]
