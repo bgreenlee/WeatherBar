@@ -9,11 +9,14 @@
 import Foundation
 import Cocoa
 
-class StatusMenuController: NSObject {
+let DEFAULT_CITY = "Seattle, WA"
+
+class StatusMenuController: NSObject, PreferencesWindowDelegate {
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var weatherView: WeatherView!
     var weatherMenuItem: NSMenuItem!
-
+    var preferencesWindow: PreferencesWindow!
+    
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1) // NSVariableStatusItemLength
     let weatherAPI = WeatherAPI()
 
@@ -27,16 +30,29 @@ class StatusMenuController: NSObject {
         weatherMenuItem = statusMenu.itemWithTitle("Weather")
         weatherMenuItem.view = weatherView
 
+        preferencesWindow = PreferencesWindow()
+        preferencesWindow.delegate = self
+        
         updateWeather()
     }
 
     func updateWeather() {
-        weatherAPI.fetchWeather("Seattle, WA") { weather in
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let city = defaults.stringForKey("city") ?? DEFAULT_CITY
+        weatherAPI.fetchWeather(city) { weather in
             self.weatherView.update(weather)
         }
     }
     
     @IBAction func updateClicked(sender: NSMenuItem) {
+        updateWeather()
+    }
+    
+    @IBAction func preferencesClicked(sender: NSMenuItem) {
+        preferencesWindow.showWindow(self)
+    }
+    
+    func preferencesDidUpdate() {
         updateWeather()
     }
     

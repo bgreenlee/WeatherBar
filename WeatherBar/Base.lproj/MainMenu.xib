@@ -32,7 +32,14 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="ZEe-TS-Imw"/>
-                <menuItem title="Quit" keyEquivalent="q" id="6T6-uD-0eI">
+                <menuItem title="Preferences..." id="Gnf-FV-JqN">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="preferencesClicked:" target="E63-qH-n1m" id="qrz-zI-ukQ"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Quit" id="6T6-uD-0eI">
+                    <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="quitClicked:" target="E63-qH-n1m" id="rqb-nY-8Z4"/>
                     </connections>
