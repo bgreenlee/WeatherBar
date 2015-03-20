@@ -41,15 +41,11 @@
             <point key="canvasLocation" x="237" y="367.5"/>
         </menu>
         <customView id="4ZI-gd-R3g" customClass="WeatherView" customModule="WeatherBar" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="265" height="90"/>
+            <rect key="frame" x="0.0" y="0.0" width="265" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N8G-HB-m9F">
-                    <rect key="frame" x="20" y="22" width="50" height="50"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Neu-W8-ZlC"/>
-                </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E1D-6m-uwT">
-                    <rect key="frame" x="78" y="55" width="169" height="17"/>
+                    <rect key="frame" x="76" y="33" width="169" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="City" id="XMg-q6-8fj">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -57,13 +53,17 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-mb-kdd">
-                    <rect key="frame" x="80" y="30" width="167" height="17"/>
+                    <rect key="frame" x="76" y="8" width="167" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Current Conditions" id="CVa-Cn-tT8">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N8G-HB-m9F">
+                    <rect key="frame" x="20" y="0.0" width="50" height="50"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Neu-W8-ZlC"/>
+                </imageView>
             </subviews>
             <connections>
                 <outlet property="cityTextField" destination="E1D-6m-uwT" id="G0L-dt-jO5"/>
