@@ -13,6 +13,7 @@
 		A2A59C601ABB31560030BB74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2A59C5F1ABB31560030BB74 /* Images.xcassets */; };
 		A2A59C631ABB31560030BB74 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2A59C611ABB31560030BB74 /* MainMenu.xib */; };
 		A2A59C6F1ABB31560030BB74 /* WeatherBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A59C6E1ABB31560030BB74 /* WeatherBarTests.swift */; };
+		A2EF56C91ABBC5C500007C73 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF56C81ABBC5C500007C73 /* WeatherView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		A2A59C681ABB31560030BB74 /* WeatherBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A59C6D1ABB31560030BB74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2A59C6E1ABB31560030BB74 /* WeatherBarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherBarTests.swift; sourceTree = "<group>"; };
+		A2EF56C81ABBC5C500007C73 /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				A2A59C5D1ABB31560030BB74 /* AppDelegate.swift */,
 				A28F6DD41ABB48FD00DD196E /* StatusMenuController.swift */,
 				A28F6DD61ABB4B9800DD196E /* WeatherAPI.swift */,
+				A2EF56C81ABBC5C500007C73 /* WeatherView.swift */,
 				A2A59C611ABB31560030BB74 /* MainMenu.xib */,
 				A2A59C5F1ABB31560030BB74 /* Images.xcassets */,
 				A2A59C5B1ABB31560030BB74 /* Supporting Files */,
@@ -214,6 +217,7 @@
 				A28F6DD71ABB4B9800DD196E /* WeatherAPI.swift in Sources */,
 				A28F6DD51ABB48FD00DD196E /* StatusMenuController.swift in Sources */,
 				A2A59C5E1ABB31560030BB74 /* AppDelegate.swift in Sources */,
+				A2EF56C91ABBC5C500007C73 /* WeatherView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
