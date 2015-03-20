@@ -26,7 +26,9 @@ class StatusMenuController: NSObject {
 
     func updateWeather() {
         weatherAPI.fetchWeather("Seattle, WA") { weather in
-            NSLog(weather.description)
+            if let weatherMenuItem = self.statusMenu.itemWithTitle("Weather") {
+                weatherMenuItem.title = weather.description
+            }
         }
     }
     
