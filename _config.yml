@@ -1,3 +1,3 @@
 highlighter: pygments
-markdown: kramdown
+markdown: redcarpet
 exclude: ["WeatherBar.xcodeproj"]
