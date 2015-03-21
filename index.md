@@ -60,24 +60,24 @@ Ctrl-drag from the *Quit* menu item to the code and create a `quitClicked` **act
 
 In *AppDelegate.swift*, delete the `window` var, and under `statusMenu`, add:
 
-```swift
+~~~ swift
 let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1) // NSVariableStatusItemLength
-```
+~~~
 
 (The -1 represents the constant `NSVariableStatusItemLength` (-2 is `NSSquareStatusItemLength`), which for some reason hasn't been ported over to Swift yet.)
 
 In `applicationDidFinishLaunching`, add:
 
-```swift
+~~~ swift
 statusItem.title = "WeatherBar"
 statusItem.menu = statusMenu
-```
+~~~
 
 And in `quitClicked`:
 
-```swift
+~~~ swift
 NSApplication.sharedApplication().terminate(self)
-```
+~~~
 
 Run it! You have a working menu bar app.
 
@@ -103,12 +103,12 @@ Click **Images.xcassets**, then the plus button on the bottom of the next panel 
 
 In `applicationDidFinishLaunching`, add:
 
-```swift
+~~~ swift
 let icon = NSImage(named: "statusIcon")
 icon?.setTemplate(true) // best for dark mode
 statusItem.image = icon
 statusItem.menu = statusMenu
-```
+~~~
 
 Delete the `statusItem.title` line.
 
@@ -120,7 +120,7 @@ Before we add more code, we should find a better place to put it. The AppDelegat
 
 Create a controller for the status menu: File ⟶ New File ⟶ Source ⟶ Cocoa Class ⟶ "StatusMenuController", with a subclass of NSObject. And let's move over our code from the AppDelegate. It should contain:
 
-```swift
+~~~ swift
 import Cocoa
 
 class StatusMenuController: NSObject {
@@ -139,7 +139,7 @@ class StatusMenuController: NSObject {
         NSApplication.sharedApplication().terminate(self)
     }
 }
-```
+~~~
 
 Remove the above code from AppDelegate.
 
@@ -161,7 +161,7 @@ The next thing we need is something to manage communication with the weather API
 
 File ⟶ New File ⟶ Source ⟶ Swift File ⟶ WeatherAPI.swift
 
-```swift
+~~~ swift
 class WeatherAPI {
     let BASE_URL = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q="
 
@@ -176,7 +176,7 @@ class WeatherAPI {
         task.resume()
     }
 }
-```
+~~~
 
 Now we need a way to call this. We could just stick a call in **AppDelegate** or **StatusMenuController#awakeFromNib**, but let's be a little less lazy and add a menu item to call it.
 
@@ -186,21 +186,21 @@ Rename the new menu item "Update". Open the Assistant Editor with **StatusMenuCo
 
 We need to instantiate **WeatherAPI**, so in **StatusMenuController** at the top, under `let statusItem` add:
 
-```swift
+~~~ swift
 let weatherAPI = WeatherAPI()
-```
+~~~
 
 and in `updateClicked`, add:
 
-```swift
+~~~ swift
 weatherAPI.fetchWeather("Seattle")
-```
+~~~
 
 Run it, and select Update. You should see the JSON response in the console.
 
 Now, you probably want it to fetch the weather as soon as the app launches. Let's reorganize `StatusMenuController` a bit, adding an `updateWeather` method. Here's what it looks like now:
 
-```swift
+~~~ swift
 class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
 
@@ -228,7 +228,7 @@ class StatusMenuController: NSObject {
         NSApplication.sharedApplication().terminate(self)
     }
 }
-```
+~~~
 
 ## Parsing JSON ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-04-json-parsing))
 
@@ -236,7 +236,7 @@ Parsing JSON is a little awkward in Swift, and people have written libraries–l
 
 Here's the JSON returned by OpenWeatherMap:
 
-```json
+~~~ json
 {
     "coord": {
         "lon": -122.33,
@@ -276,21 +276,21 @@ Here's the JSON returned by OpenWeatherMap:
     "name": "Seattle",
     "cod": 200
 }
-```
+~~~
 
 There's a lot of information we could use here, but for now let's keep it simple and just take the city name, current temperature, and the weather description. Let's first create a place to put the weather data. In **WeatherAPI.swift**, add a struct at the top of the file:
 
-```swift
+~~~ swift
 struct Weather {
     var city: String
     var currentTemp: Float
     var conditions: String
 }
-```
+~~~
 
 Now add a function to parse the incoming JSON data and return a Weather object:
 
-```swift
+~~~ swift
 func weatherFromJSONData(data: NSData) -> Weather? {
     var err: NSError?
     typealias JSONDict = [String:AnyObject]
@@ -310,28 +310,28 @@ func weatherFromJSONData(data: NSData) -> Weather? {
     }
     return nil
 }
-```
+~~~
 
 We return an **Optional(Weather)** because it's possible the JSON may fail to parse.
 
 Now, change the `fetchWeather` function to call `weatherFromJSONData`:
 
-```swift
+~~~ swift
 let task = session.dataTaskWithURL(url!) { data, response, error in
     let weather = self.weatherFromJSONData(data)
     NSLog("\(weather)")
 }
-```
+~~~
 
 If you run it now, you'll see that the logging isn't terribly helpful:
 
-```
+~~~
 2015-03-19 14:58:00.758 WeatherBar[49688:1998824] Optional(WeatherBar.Weather)
-```
+~~~
 
 To make our Weather struct printable, we need to implement the [Printable](https://developer.apple.com/library/ios/documentation/General/Reference/SwiftStandardLibraryReference/Printable.html) or **DebugPrintable** protocols, which just entails adding a `description` or `debugDescription` var. Let's do the former:
 
-```swift
+~~~ swift
 struct Weather: Printable {
     var city: String
     var currentTemp: Float
@@ -341,13 +341,13 @@ struct Weather: Printable {
         return "\(city): \(currentTemp)F and \(conditions)"
     }
 }
-```
+~~~
 
 If you run it again now you'll see:
 
-```
+~~~
 2015-03-19 15:11:49.130 WeatherBar[50731:2009152] Optional(Seattle: 58.87F and Clouds)
-```
+~~~
 
 ## Getting the Weather into the Controller ([delegate code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-05a-delegate) or [callback code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-05b-callback))
 
@@ -359,39 +359,39 @@ There are two common ways to handle this. The most common pattern in MacOS and i
 
 Add the following above `class WeatherAPI`:
 
-```swift
+~~~ swift
 protocol WeatherAPIDelegate {
     func weatherDidUpdate(weather: Weather)
 }
-```
+~~~
 
 Add the following class variable to WeatherAPI:
 
-```swift
+~~~ swift
 var delegate: WeatherAPIDelegate?
-```
+~~~
 
 Add an initializer fuction:
 
-```swift
+~~~ swift
 init(delegate: WeatherAPIDelegate) {
     self.delegate = delegate
 }
-```
+~~~
 
 And now the data fetch task in `fetchWeather` will look like this:
 
-```swift
+~~~ swift
 let task = session.dataTaskWithURL(url!) { data, response, error in
     if let weather = self.weatherFromJSONData(data) {
         self.delegate?.weatherDidUpdate(weather)
     }
 }
-```
+~~~
 
 Finally, we implement the `WeatherAPIDelegate` protocol in the controller, with a few changes noted:
 
-```swift
+~~~ swift
 class StatusMenuController: NSObject, WeatherAPIDelegate {
 ...
   var weatherAPI: WeatherAPI!
@@ -406,11 +406,11 @@ class StatusMenuController: NSObject, WeatherAPIDelegate {
     NSLog(weather.description)
   }
   ...
-```
+~~~
 
 However, with the relatively recent introduction of blocks to Objective-C, and Swift's first-class functions, a simpler way is to use callbacks:
 
-```swift
+~~~ swift
 func fetchWeather(query:String, success: (Weather) -> Void) {
     let session = NSURLSession.sharedSession()
     let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
@@ -422,19 +422,19 @@ func fetchWeather(query:String, success: (Weather) -> Void) {
     }
     task.resume()
 }
-```
+~~~
 
 Here, `success` is a function that takes a Weather object as a parameter and returns `Void` (nothing).
 
 In our controller:
 
-```swift
+~~~ swift
 func updateWeather() {
     weatherAPI.fetchWeather("Seattle, WA") { weather in
         NSLog(weather.description)
     }
 }
-```
+~~~
 
 
 ## Displaying the Weather ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-06-displaying))
@@ -447,11 +447,11 @@ In MainMenu.xib, add a new MenuItem between Update and Quit (and another separat
 
 In your controller, in `updateWeather`, replace the `NSLog` with:
 
-```swift
+~~~ swift
 if let weatherMenuItem = self.statusMenu.itemWithTitle("Weather") {
     weatherMenuItem.title = weather.description
 }
-```
+~~~
 
 Run and voila!
 
@@ -475,7 +475,7 @@ New File ⟶ Source ⟶ Cocoa Class, name it WeatherView and make it a subclass 
 
 Back in MainMenu.xib, click on the View, and in the Identity Inspector, set the class to "WeatherView". Now use the Assistant editor to bring up the xib and class file side-by-side, and then ctrl-drag from the xib to create outlets for each of the elements in the view. WeatherView.swift should look like:
 
-```swift
+~~~ swift
 import Cocoa
 
 class WeatherView: NSView {
@@ -483,43 +483,43 @@ class WeatherView: NSView {
     @IBOutlet weak var cityTextField: NSTextField!
     @IBOutlet weak var currentConditionsTextField: NSTextField!
 }
-```
+~~~
 
 Now add a method to WeatherView so we can update it with a Weather object:
 
-```swift
+~~~ swift
     func update(weather: Weather) {
         cityTextField.stringValue = weather.city
         currentConditionsTextField.stringValue = "\(Int(weather.currentTemp))°F and \(weather.conditions)"
     }
-```
+~~~
 
 Now bring up StatusMenuController in the Assistant editor, and ctrl-drag from the Weather View object over to the top of the StatusMenuController class to create a `weatherView` outlet. While we're there, we're going to add a `weatherMenuItem` class var:
 
-```swift
+~~~ swift
 class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var weatherView: WeatherView!
     var weatherMenuItem: NSMenuItem!
     ...
-```
+~~~
 
 In StatusMenuController's `awakeFromNib` method, right before the call to `updateWeather`, add:
 
-```swift
+~~~ swift
 weatherMenuItem = statusMenu.itemWithTitle("Weather")
 weatherMenuItem.view = weatherView
-```
+~~~
 
 And now `updateWeather` is even simpler:
 
-```swift
+~~~ swift
 func updateWeather() {
     weatherAPI.fetchWeather("Seattle, WA") { weather in
         self.weatherView.update(weather)
     }
 }
-```
+~~~
 
 Run it!
 
@@ -531,26 +531,26 @@ The images for the various weather conditions can be found at http://openweather
 
 We need to update **WeatherAPI** to capture the icon code. In the Weather struct, add:
 
-```swift
+~~~ swift
 var icon: String
-```
+~~~
 
 and in `weatherFromJSONData`, add that to the Weather initialization:
 
-```swift
+~~~ swift
 var weather = Weather(
     city: json["name"] as String,
     currentTemp: mainDict["temp"] as Float,
     conditions: weatherDict["main"] as String,
     icon: weatherDict["icon"] as String
 )
-```
+~~~
 
 Now in the `update` method of WeatherView, add:
 
-```swift
+~~~ swift
 imageView.image = NSImage(named: weather.icon)
-```
+~~~
 
 That's it! Run it.
 
@@ -574,35 +574,35 @@ Bring up the Assistant editor with **PreferencesWindow.swift** and ctrl-drag fro
 
 In PreferencesWindow.swift, add:
 
-```swift
+~~~ swift
 override var windowNibName : String! {
     return "PreferencesWindow"
 }
-```
+~~~
 
 and at the end of `windowDidLoad()`, add:
 
-```swift
+~~~ swift
 self.window?.center()
-```
+~~~
 
 In **StatusMenuController.swift**, add a `preferencesWindow` class var:
 
-```swift
+~~~ swift
 var preferencesWindow: PreferencesWindow!
-```
+~~~
 
 and initialize in `awakeFromNib()`, before the call to `updateWeather()`:
 
-```swift
+~~~ swift
 preferencesWindow = PreferencesWindow()
-```
+~~~
 
 Finally, in the `preferencesClicked` function, add:
 
-```swift
+~~~ swift
 preferencesWindow.showWindow(nil)
-```
+~~~
 
 If you run now, selecting the Preferences... menu item should bring up the preferences window.
 
@@ -610,81 +610,81 @@ Now, let's actually save and update the city.
 
 Make the PreferencesWindow class an `NSWindowDelegate`:
 
-```swift
+~~~ swift
 class PreferencesWindow: NSWindowController, NSWindowDelegate {
-```
+~~~
 
 and add:
 
-```swift
+~~~ swift
 func windowWillClose(notification: NSNotification) {
     NSLog("city is: " + cityTextField.stringValue)
 }
-```
+~~~
 
 If you run it now, you'll see whatever you typed in the text field displayed when you close the window.
 
 Saving the value is easy:
 
-```swift
+~~~ swift
 func windowWillClose(notification: NSNotification) {
     let defaults = NSUserDefaults.standardUserDefaults()
     defaults.setValue(cityTextField.stringValue, forKey: "city")
 }
-```
+~~~
 
 Now we need to notify the StatusMenuController that the preferences have been updated. For this we'll use the Delegate pattern. This is easy, but requires a number of edits. First, at the top of PreferencesWindow.swift, add a `PreferencesWindowDelegate` protocol:
 
-```swift
+~~~ swift
 protocol PreferencesWindowDelegate {
     func preferencesDidUpdate()
 }
-```
+~~~
 
 and add a `delegate` instance variable:
 
-```swift
+~~~ swift
 var delegate: PreferencesWindowDelegate?
-```
+~~~
 
 At the end of `windowWillClose`, we'll call the delegate:
 
-```swift
+~~~ swift
 delegate?.preferencesDidUpdate()
-```
+~~~
 
 Back in StatusMenuController, make it a `PreferencesWindowDelegate`:
 
-```swift
+~~~ swift
 class StatusMenuController: NSObject, PreferencesWindowDelegate {
-```
+~~~
 
 and add the delegate method:
 
-```swift
+~~~ swift
 func preferencesDidUpdate() {
     updateWeather()
 }
-```
+~~~
 
 And in `awakeFromNib`, set the delegate:
 
-```swift
+~~~ swift
 preferencesWindow = PreferencesWindow()
 preferencesWindow.delegate = self
-```
+~~~
 
 All that's left is to load the city from defaults. First add this at the top of StatusMenuController, under the imports:
 
-```swift
+~~~ swift
 let DEFAULT_CITY = "Seattle, WA"
-```
+~~~
 
 (...or whatever you want the default to be.) Yes, this is a global variable, and there are probably better ways to do this (like storing it in Info.plist), but that can be left as an exercise for the reader.
 
 Load the saved city, or default, in `updateWeather`:
 
-```swift
+~~~ swift
 func updateWeather() {
     let defaults = NSUserDefaults.standardUserDefaults()
     let city = defaults.stringForKey("city") ?? DEFAULT_CITY
@@ -692,15 +692,15 @@ func updateWeather() {
         self.weatherView.update(weather)
     }
 }
-```
+~~~
 
 Finally, back in PreferencesWindow.swift, we need to add similar code to load any saved city when we show the preferences. At the end of `windowDidLoad`, add:
 
-```swift
+~~~ swift
 let defaults = NSUserDefaults.standardUserDefaults()
 let city = defaults.stringForKey("city") ?? DEFAULT_CITY
 cityTextField.stringValue = city
-```
+~~~
 
 Run it!
 
