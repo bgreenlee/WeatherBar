@@ -121,7 +121,7 @@ statusItem.menu = statusMenu
 
 <p><img src="assets/target-info.png" alt="" /></p>
 
-<p>Run it again and you’ll see the Dock icon is gone.</p>
+<p>Run it again and you’ll see the Dock icon and default menus are gone.</p>
 
 <h3 id="create-an-icon">Create an Icon</h3>
 
@@ -168,6 +168,8 @@ class StatusMenuController: NSObject {
 </code></pre>
 
 <p>Remove the above code from AppDelegate.</p>
+
+<p>We’ll need to reconnect everything again. We’ll also need to make sure that our StatusMenuController gets loaded when MainMenu.xib gets loaded. To do that, we need to add it as an Object in the XIB.</p>
 
 <p>Go to <strong>MainMenu.xib</strong>. In the Library, type “object”, and then drag an Object over to just above your Menu.</p>
 
@@ -694,14 +696,17 @@ cityTextField.stringValue = city
 <ul>
   <li>Add other weather info (high/low temp, humidity, sunrise/sunset, etc) to the Weather View</li>
   <li>Change the status menu icon + title to reflect the current conditions</li>
-  <li>Make it so clicking on the Weather View opens a browser with detailed weather information (hint: <code>NSWorkspace.sharedWorkspace().openURL(url: NSURL)</code>)</li>
+  <li>Make it so clicking on the Weather View opens a browser with detailed weather information (hint: <code>NSWorkspace.sharedWorkspace().openURL(url: NSURL)</code>). Note that since we’re using a custom view, the menu item isn’t highlighted when you mouse over it, so you’ll probably want to do something to make it obvious that it is clickable.</li>
+  <li>Add some error handling. Right now if we get an unexpected response from the API, for example, bad things will happen.</li>
+  <li><a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/Introduction/Introduction.html#//apple_ref/doc/uid/TP40014132-CH1-SW1">Write some tests!</a></li>
   <li>Add an app icon. This isn’t hard, but it can be a pain creating the <a href="https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Optimizing/Optimizing.html">various sizes that Apple wants</a>. Fortunately, there are <a href="https://itunes.apple.com/us/app/asset-catalog-creator-app/id809625456?mt=12">tools to make this easier</a>.</li>
+  <li>Add a preference to launch the app on login. I’ve used the <a href="https://github.com/Mozketo/LaunchAtLoginController">LaunchAtLoginController</a> library in other apps. There’s also <a href="http://bdunagan.com/2010/09/25/cocoa-tip-enabling-launch-on-startup/">this blog post</a>, if you want to try porting the code over to Swift.</li>
 </ul>
 
 <h3 id="more-challenging">More Challenging</h3>
 
 <ul>
-  <li>Add support for multiple cities. This will take some effort, especially if the number of cities is dynamic. I think you’ll have to put the Weather View in its own XIB, and load it manually (look at <code>NSBundle.mainBundle().loadNibNamed(name, owner: owner, options: options)</code>). The UI in Preferences will need to be updated as well.</li>
+  <li>Add support for multiple cities. This will take some effort, especially if the number of cities is dynamic. I think you’ll have to put the Weather View in its own XIB, and load it manually (look at <code>NSBundle.mainBundle().loadNibNamed(name, owner: owner, options: options)</code>). The UI in Preferences will obviously need to be updated as well.</li>
 </ul>
 
 <h3 id="you-know-way-more-than-me-now">You Know Way More Than Me Now</h3>

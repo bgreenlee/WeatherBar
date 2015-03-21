@@ -513,5 +513,22 @@ code, pre {
 }
 
 p {
-  margin-top: 10px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+#main-content h2 {
+  margin-top: 8px;
+}
+
+ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+ul li:before {
+  content: "\0BB \020";
+  color: #9ddcff;
 }
