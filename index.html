@@ -1,0 +1,1554 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
+  width: 45em;
+  border: 1px solid #ddd;
+  outline: 1300px solid #fff;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 30px;
+}
+
+@font-face {
+  font-family: fontawesome-mini;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+@font-face {
+  font-family: octicons-anchor;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+.markdown-body {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body b,
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body sub,
+.markdown-body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.markdown-body sup {
+  top: -0.5em;
+}
+.markdown-body sub {
+  bottom: -0.25em;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body .codehilitetable {
+  border: 0;
+  border-spacing: 0;
+}
+
+.markdown-body .codehilitetable tr {
+  border: 0;
+}
+
+.markdown-body .codehilitetable pre,
+.markdown-body .codehilitetable div.codehilite {
+  margin: 0;
+}
+
+.markdown-body .linenos,
+.markdown-body .code,
+.markdown-body .codehilitetable td {
+  border: 0;
+  padding: 0;
+}
+
+.markdown-body td:not(.linenos) .linenodiv {
+  padding: 0 !important;
+}
+
+.markdown-body .code {
+  width: 100%;
+}
+
+.markdown-body .linenos div pre,
+.markdown-body .linenodiv pre,
+.markdown-body .linenodiv {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.markdown-body .code div pre,
+.markdown-body .code div {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.4;
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before,
+.markdown-body hr:after {
+  display: table;
+  content: " ";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -moz-linear-gradient(#fefefe, #e7e7e7);
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  border-radius: 2px;
+  border: 1px solid #cfcfcf;
+  color: #000;
+  padding: 3px 5px;
+  line-height: 10px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  display: inline-block;
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .headeranchor-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  padding-right: 6px;
+  padding-left: 30px;
+  margin-left: -30px;
+}
+
+.markdown-body .headeranchor-link:focus {
+  outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.markdown-body h1 .headeranchor,
+.markdown-body h2 .headeranchor,
+.markdown-body h3 .headeranchor,
+.markdown-body h4 .headeranchor,
+.markdown-body h5 .headeranchor,
+.markdown-body h6 .headeranchor {
+  display: none;
+  color: #000;
+  vertical-align: middle;
+}
+
+.markdown-body h1:hover .headeranchor-link,
+.markdown-body h2:hover .headeranchor-link,
+.markdown-body h3:hover .headeranchor-link,
+.markdown-body h4:hover .headeranchor-link,
+.markdown-body h5:hover .headeranchor-link,
+.markdown-body h6:hover .headeranchor-link {
+  height: 1em;
+  padding-left: 8px;
+  margin-left: -30px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1:hover .headeranchor-link .headeranchor,
+.markdown-body h2:hover .headeranchor-link .headeranchor,
+.markdown-body h3:hover .headeranchor-link .headeranchor,
+.markdown-body h4:hover .headeranchor-link .headeranchor,
+.markdown-body h5:hover .headeranchor-link .headeranchor,
+.markdown-body h6:hover .headeranchor-link .headeranchor {
+  display: inline-block;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre,
+.markdown-body .admonition {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code,
+.markdown-body samp {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .codehilite {
+  margin-bottom: 16px;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .codehilite pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+/* Admonition */
+.markdown-body .admonition {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  border-left: 6px solid #333;
+  padding: 10px 10px 10px 30px;
+}
+
+.markdown-body .admonition table {
+  color: #333;
+}
+
+.markdown-body .admonition p {
+  padding: 0;
+}
+
+.markdown-body .admonition-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.markdown-body .admonition>.admonition-title {
+  color: #333;
+}
+
+.markdown-body .attention>.admonition-title {
+  color: #a6d796;
+}
+
+.markdown-body .caution>.admonition-title {
+  color: #d7a796;
+}
+
+.markdown-body .hint>.admonition-title {
+  color: #96c6d7;
+}
+
+.markdown-body .danger>.admonition-title {
+  color: #c25f77;
+}
+
+.markdown-body .question>.admonition-title {
+  color: #96a6d7;
+}
+
+.markdown-body .note>.admonition-title {
+  color: #d7c896;
+}
+
+.markdown-body .admonition:before,
+.markdown-body .attention:before,
+.markdown-body .caution:before,
+.markdown-body .hint:before,
+.markdown-body .danger:before,
+.markdown-body .question:before,
+.markdown-body .note:before {
+  font: normal normal 16px fontawesome-mini;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.markdown-body .admonition:before {
+  content: "\f056\00a0";
+  color: 333;
+}
+
+.markdown-body .attention:before {
+  content: "\f058\00a0";
+  color: #a6d796;
+}
+
+.markdown-body .caution:before {
+  content: "\f06a\00a0";
+  color: #d7a796;
+}
+
+.markdown-body .hint:before {
+  content: "\f05a\00a0";
+  color: #96c6d7;
+}
+
+.markdown-body .danger:before {
+  content: "\f057\00a0";
+  color: #c25f77;
+}
+
+.markdown-body .question:before {
+  content: "\f059\00a0";
+  color: #96a6d7;
+}
+
+.markdown-body .note:before {
+  content: "\f040\00a0";
+  color: #d7c896;
+}
+
+.markdown-body .admonition::after {
+  content: normal;
+}
+
+.markdown-body .attention {
+  border-left: 6px solid #a6d796;
+}
+
+.markdown-body .caution {
+  border-left: 6px solid #d7a796;
+}
+
+.markdown-body .hint {
+  border-left: 6px solid #96c6d7;
+}
+
+.markdown-body .danger {
+  border-left: 6px solid #c25f77;
+}
+
+.markdown-body .question {
+  border-left: 6px solid #96a6d7;
+}
+
+.markdown-body .note {
+  border-left: 6px solid #d7c896;
+}
+
+.markdown-body .admonition>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body .admonition>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* progress bar*/
+.markdown-body .progress {
+  display: block;
+  width: 300px;
+  margin: 10px 0;
+  height: 24px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #ededed;
+  position: relative;
+  box-shadow: inset -1px 1px 3px rgba(0, 0, 0, .1);
+}
+
+.markdown-body .progress-label {
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  width: 100%; margin: 0;
+  line-height: 24px;
+  color: #333;
+  text-shadow: 1px 1px 0 #fefefe, -1px -1px 0 #fefefe, -1px 1px 0 #fefefe, 1px -1px 0 #fefefe, 0 1px 0 #fefefe, 0 -1px 0 #fefefe, 1px 0 0 #fefefe, -1px 0 0 #fefefe, 1px 1px 2px #000;
+  -webkit-font-smoothing: antialiased !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.markdown-body .progress-bar {
+  height: 24px;
+  float: left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #96c6d7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .1);
+  background-size: 30px 30px;
+  background-image: -webkit-linear-gradient(
+    135deg, rgba(255, 255, 255, .4) 27%,
+    transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%,
+    transparent 77%, transparent
+  );
+  background-image: -moz-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -ms-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -o-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+}
+
+.markdown-body .progress-100plus .progress-bar {
+  background-color: #a6d796;
+}
+
+.markdown-body .progress-80plus .progress-bar {
+  background-color: #c6d796;
+}
+
+.markdown-body .progress-60plus .progress-bar {
+  background-color: #d7c896;
+}
+
+.markdown-body .progress-40plus .progress-bar {
+  background-color: #d7a796;
+}
+
+.markdown-body .progress-20plus .progress-bar {
+  background-color: #d796a6;
+}
+
+.markdown-body .progress-0plus .progress-bar {
+  background-color: #c25f77;
+}
+
+.markdown-body .candystripe-animate .progress-bar{
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+  animation: animate-stripes 3s linear infinite;
+}
+
+@-webkit-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@-moz-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+.markdown-body .gloss .progress-bar {
+  box-shadow:
+    inset 0 4px 12px rgba(255, 255, 255, .7),
+    inset 0 -12px 0 rgba(0, 0, 0, .05);
+}
+
+/* Multimarkdown Critic Blocks */
+.markdown-body .critic_mark {
+  background: #ff0;
+}
+
+.markdown-body .critic_delete {
+  color: #c82829;
+  text-decoration: line-through;
+}
+
+.markdown-body .critic_insert {
+  color: #718c00 ;
+  text-decoration: underline;
+}
+
+.markdown-body .critic_comment {
+  color: #8e908c;
+  font-style: italic;
+}
+
+.markdown-body .headeranchor {
+  font: normal normal 16px octicons-anchor;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.headeranchor:before {
+  content: '\f05c';
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 4px 0.25em -20px;
+  vertical-align: middle;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  .markdown-body {
+    font-size:14px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .markdown-body {
+    font-size:16px;
+  }
+}
+
+@media print {
+  .markdown-body * {
+    background: transparent !important;
+    color: black !important;
+    filter:none !important;
+    -ms-filter: none !important;
+  }
+
+  .markdown-body {
+    font-size:12pt;
+    max-width:100%;
+    outline:none;
+    border: 0;
+  }
+
+  .markdown-body a,
+  .markdown-body a:visited {
+    text-decoration: underline;
+  }
+
+  .markdown-body .headeranchor-link {
+    display: none;
+  }
+
+  .markdown-body a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  .markdown-body abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .markdown-body .ir a:after,
+  .markdown-body a[href^="javascript:"]:after,
+  .markdown-body a[href^="#"]:after {
+    content: "";
+  }
+
+  .markdown-body pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .markdown-body pre,
+  .markdown-body blockquote {
+    border: 1px solid #999;
+    padding-right: 1em;
+    page-break-inside: avoid;
+  }
+
+  .markdown-body .progress,
+  .markdown-body .progress-bar {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .markdown-body .progress {
+    border: 1px solid #ddd;
+  }
+
+  .markdown-body .progress-bar {
+    height: 22px;
+    border-right: 1px solid #ddd;
+  }
+
+  .markdown-body tr,
+  .markdown-body img {
+    page-break-inside: avoid;
+  }
+
+  .markdown-body img {
+    max-width: 100% !important;
+  }
+
+  .markdown-body p,
+  .markdown-body h2,
+  .markdown-body h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .markdown-body h2,
+  .markdown-body h3 {
+    page-break-after: avoid;
+  }
+}
+</style><title>index</title></head><body><article class="markdown-body"><hr />
+<h2 id="layout-default"><a name="user-content-layout-default" href="#layout-default" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>layout: default</h2>
+<h1 id="write-a-mac-menu-bar-app-in-swift"><a name="user-content-write-a-mac-menu-bar-app-in-swift" href="#write-a-mac-menu-bar-app-in-swift" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Write a Mac Menu Bar App in Swift</h1>
+<p>This tutorial will walk you through writing a Mac Menu Bar (aka Status Bar) app, using Swift. We&rsquo;ll build a simple weather app using data from <a href="http://openweathermap.org/">OpenWeatherMap</a>. In the end, it will look like this:</p>
+<p><img alt="" src="/Users/brad/workspace/MacSwiftEtsySchool/WeatherBar/assets/weatherbar.png" /></p>
+<p>The complete code can be found at <a href="https://github.etsycorp.com/bgreenlee/WeatherBar">https://github.etsycorp.com/bgreenlee/WeatherBar</a>, with step of the tutorial in its own branch.</p>
+<h2 id="whats-a-menu-bar-app-and-why-would-i-want-to-write-one"><a name="user-content-whats-a-menu-bar-app-and-why-would-i-want-to-write-one" href="#whats-a-menu-bar-app-and-why-would-i-want-to-write-one" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>What&rsquo;s a Menu Bar App and Why Would I Want to Write One?</h2>
+<p>Technically, they&rsquo;re Status Bar apps, but most people outside of Apple will refer to them as Menu Bar apps.</p>
+<p>{% include image.html url=&rdquo;assets/squeeler.png&rdquo; description=&rdquo;Squeeler, an app I wrote to warn of processes using excessive CPU.&rdquo; %}</p>
+<p>Menu Bar apps are great for creating quick utilities. Because the UI is fairly constrained, they are easy to design and create. They&rsquo;re especially well-suited for processes that run in the background, or for quick reference.</p>
+<h2 id="prerequisites"><a name="user-content-prerequisites" href="#prerequisites" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Prerequisites</h2>
+<p>You should have the latest stable version of <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">Xcode</a>. At the time of this writing, that is 6.2. As Swift is a language still under heavy development, it&rsquo;s not unlikely that the code written here may fail to compile on earlier or later versions. I&rsquo;ll try to keep this up-to-date, but if you find any errors, please <a href="mailto:brad@footle.org">let me know</a>.</p>
+<h2 id="step-0-get-something-running-code"><a name="user-content-step-0-get-something-running-code" href="#step-0-get-something-running-code" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Step 0: Get Something Running (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-00">code</a>)</h2>
+<p>Open Xcode.</p>
+<p>Create a New Project or <em>File ⟶ New ⟶ Project</em></p>
+<p>Choose <em>Application ⟶ Cocoa Application</em> under OS X and click Next</p>
+<p>Product Name: <em>WeatherBar</em>, Language <em>Swift</em>, uncheck <em>Use Storyboards</em>. Organization name and identifier are not important at this stage. Make something up if you like.</p>
+<p><img alt="" src="/Users/brad/workspace/MacSwiftEtsySchool/WeatherBar/assets/new-project.png" /></p>
+<p>Hit next and save somewhere.</p>
+<h3 id="lets-code"><a name="user-content-lets-code" href="#lets-code" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Let&rsquo;s Code!</h3>
+<p>Click on <em>MainMenu.xib</em></p>
+<p>Under Objects, delete the default window and menu.</p>
+<p><img alt="" src="/Users/brad/workspace/MacSwiftEtsySchool/WeatherBar/assets/window-menu-delete.png" /></p>
+<p>Go to the library, type &ldquo;menu&rdquo; and drag out an <em>NSMenu</em>.</p>
+<p>Delete all but one menu item.</p>
+<p>Rename the last menu item to <em>Quit</em>.</p>
+<p>Open the Assistant Editor (⌥⌘↩), this lets us have the Interface Builder and our code side-by-side. Make sure <em>AppDelegate.swift</em> is in the right-hand pane.</p>
+<p>Ctrl-drag from Menu to code and create a <code>statusMenu</code>outlet.</p>
+<p><img alt="" src="/Users/brad/workspace/MacSwiftEtsySchool/WeatherBar/assets/create-outlet.png" /></p>
+<p>Ctrl-drag from the <em>Quit</em> menu item to the code and create a <code>quitClicked</code> <strong>action</strong> (set type to <em>NSMenuItem</em>)</p>
+<p>In <em>AppDelegate.swift</em>, delete the <code>window</code> var, and under <code>statusMenu</code>, add:</p>
+<pre><code class="swift">let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1) // NSVariableStatusItemLength
+</code></pre>
+
+<p>(The -1 represents the constant <code>NSVariableStatusItemLength</code> (-2 is <code>NSSquareStatusItemLength</code>), which for some reason hasn&rsquo;t been ported over to Swift yet.)</p>
+<p>In <code>applicationDidFinishLaunching</code>, add:</p>
+<pre><code class="swift">statusItem.title = &quot;WeatherBar&quot;
+statusItem.menu = statusMenu
+</code></pre>
+
+<p>And in <code>quitClicked</code>:</p>
+<pre><code class="swift">NSApplication.sharedApplication().terminate(self)
+</code></pre>
+
+<p>Run it! You have a working menu bar app.</p>
+<h2 id="step-1-make-it-look-like-a-real-menu-bar-app-code"><a name="user-content-step-1-make-it-look-like-a-real-menu-bar-app-code" href="#step-1-make-it-look-like-a-real-menu-bar-app-code" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Step 1: Make it Look Like a Real Menu Bar App (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-01-icon">code</a>)</h2>
+<p>You might have noticed an icon shows up in your Dock when you ran your app. You also get the default application menus on the left side of the status bar. Menu bar apps don&rsquo;t need either of those, so let&rsquo;s get rid of them.</p>
+<p>Click the application name in the navigator on the left side, then Info in the center pane.</p>
+<p>Under <em>Custom OS X Application Target Properties</em>, add new property (click on the any property and then on the + that appears).</p>
+<p>Type &ldquo;Application is agent (UIElement)&rdquo; and set the value to YES.</p>
+<p><img alt="" src="/Users/brad/workspace/MacSwiftEtsySchool/WeatherBar/assets/target-info.png" /></p>
+<p>Run it again and you&rsquo;ll see the Dock icon is gone.</p>
+<h3 id="create-an-icon"><a name="user-content-create-an-icon" href="#create-an-icon" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Create an Icon</h3>
+<p>For the icon that goes in the status bar, you need two versions, one 18x18 <img alt="" src="/Users/brad/workspace/MacSwiftEtsySchool/WeatherBar/assets/statusIcon-sun.png" />, and one 2x version at 36x36 <img alt="" src="/Users/brad/workspace/MacSwiftEtsySchool/WeatherBar/assets/statusIcon-sun%402x.png" />.</p>
+<p>Click <strong>Images.xcassets</strong>, then the plus button on the bottom of the next panel to the right, and select <strong>New Image Set</strong>. Name the image set &ldquo;statusIcon&rdquo; and drag the icons into the 1x and 2x boxes.</p>
+<p>In <code>applicationDidFinishLaunching</code>, add:</p>
+<pre><code class="swift">let icon = NSImage(named: &quot;statusIcon&quot;)
+icon?.setTemplate(true) // best for dark mode
+statusItem.image = icon
+statusItem.menu = statusMenu
+</code></pre>
+
+<p>Delete the <code>statusItem.title</code> line.</p>
+<p>Try running it again.</p>
+<h2 id="step-2-reorganize-code"><a name="user-content-step-2-reorganize-code" href="#step-2-reorganize-code" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Step 2: Reorganize (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-02-reorg">code</a>)</h2>
+<p>Before we add more code, we should find a better place to put it. The AppDelegate is really meant to be used only for handling application lifecycle events. We <em>could</em> dump all our code in there, but at some point you&rsquo;re going to hate yourself.</p>
+<p>Create a controller for the status menu: File ⟶ New File ⟶ Source ⟶ Cocoa Class ⟶ &ldquo;StatusMenuController&rdquo;, with a subclass of NSObject. And let&rsquo;s move over our code from the AppDelegate. It should contain:</p>
+<pre><code class="swift">import Cocoa
+
+class StatusMenuController: NSObject {
+    @IBOutlet weak var statusMenu: NSMenu!
+
+    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1) // NSVariableStatusItemLength
+
+    override func awakeFromNib() {
+        let icon = NSImage(named: &quot;statusIcon&quot;)
+        icon?.setTemplate(true) // best for dark mode
+        statusItem.image = icon
+        statusItem.menu = statusMenu
+    }
+
+    @IBAction func quitClicked(sender: NSMenuItem) {
+        NSApplication.sharedApplication().terminate(self)
+    }
+}
+</code></pre>
+
+<p>Remove the above code from AppDelegate.</p>
+<p>Go to <strong>MainMenu.xib</strong>. In the Library, type &ldquo;object&rdquo;, and then drag an Object over to just above your Menu.</p>
+<p>Name the Object &ldquo;StatusMenuController&rdquo;, select the Identity Inspector (⌥⌘3), and enter &ldquo;StatusMenuController&rdquo; in the Class field.</p>
+<p>Right-click on the StatusMenuController object, and under Outlets, drag the circle next to <strong>statusMenu</strong> over to your Menu object.</p>
+<p>Do that again for the <strong>quitClicked</strong> action, going to your Quit menu item.</p>
+<p>Finally, right-click on the App Delegate object and click the X next to the statusMenu outlet to clear that association.</p>
+<p>Now, when the application is launched and the <strong>StatusMenu.xib</strong> is instantiated, our StatusMenuController will receive <code>awakeFromNib</code>, and we can do what we need to initialize the status menu.</p>
+<h2 id="step-3-calling-the-api-code"><a name="user-content-step-3-calling-the-api-code" href="#step-3-calling-the-api-code" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Step 3: Calling the API (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-03-api">code</a>)</h2>
+<p>The next thing we need is something to manage communication with the weather API.</p>
+<p>File ⟶ New File ⟶ Source ⟶ Swift File ⟶ WeatherAPI.swift</p>
+<pre><code class="swift">class WeatherAPI {
+    let BASE_URL = &quot;http://api.openweathermap.org/data/2.5/weather?units=imperial&amp;q=&quot;
+
+    func fetchWeather(query: String) {
+        let session = NSURLSession.sharedSession()
+        let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        let url = NSURL(string: BASE_URL + escapedQuery!)
+        let task = session.dataTaskWithURL(url!) { data, response, error in
+            let dataString = NSString(data: data, encoding: NSUTF8StringEncoding) as String
+            NSLog(dataString)
+        }
+        task.resume()
+    }
+}
+</code></pre>
+
+<p>Now we need a way to call this. We could just stick a call in <strong>AppDelegate</strong> or <strong>StatusMenuController#awakeFromNib</strong>, but let&rsquo;s be a little less lazy and add a menu item to call it.</p>
+<p>In MainMenu.xib, type &ldquo;Menu Item&rdquo; into the library search field (bottom right), and drag a Menu Item over to above Quit in your menu. While we&rsquo;re at it, drag a Separator Menu Item between those two.</p>
+<p>Rename the new menu item &ldquo;Update&rdquo;. Open the Assistant Editor with <strong>StatusMenuController.swift</strong> and ctrl-drag from Update over to your code above <code>quitClicked</code> and create a new action, <code>updateClicked</code>, with the type again as <strong>NSMenuItem</strong>.</p>
+<p>We need to instantiate <strong>WeatherAPI</strong>, so in <strong>StatusMenuController</strong> at the top, under <code>let statusItem</code> add:</p>
+<pre><code class="swift">let weatherAPI = WeatherAPI()
+</code></pre>
+
+<p>and in <code>updateClicked</code>, add:</p>
+<pre><code class="swift">weatherAPI.fetchWeather(&quot;Seattle&quot;)
+</code></pre>
+
+<p>Run it, and select Update. You should see the JSON response in the console.</p>
+<p>Now, you probably want it to fetch the weather as soon as the app launches. Let&rsquo;s reorganize <code>StatusMenuController</code> a bit, adding an <code>updateWeather</code> method. Here&rsquo;s what it looks like now:</p>
+<pre><code class="swift">class StatusMenuController: NSObject {
+    @IBOutlet weak var statusMenu: NSMenu!
+
+    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1) // NSVariableStatusItemLength
+    let weatherAPI = WeatherAPI()
+
+    override func awakeFromNib() {
+        let icon = NSImage(named: &quot;statusIcon&quot;)
+        icon?.setTemplate(true) // best for dark mode
+        statusItem.image = icon
+        statusItem.menu = statusMenu
+
+        updateWeather()
+    }
+
+    func updateWeather() {
+        weatherAPI.fetchWeather(&quot;Seattle&quot;)
+    }
+
+    @IBAction func updateClicked(sender: NSMenuItem) {
+        updateWeather()
+    }
+
+    @IBAction func quitClicked(sender: NSMenuItem) {
+        NSApplication.sharedApplication().terminate(self)
+    }
+}
+</code></pre>
+
+<h2 id="step-4-parsing-json-code"><a name="user-content-step-4-parsing-json-code" href="#step-4-parsing-json-code" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Step 4: Parsing JSON (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-04-json-parsing">code</a>)</h2>
+<p>Parsing JSON is a little awkward in Swift, and people have written libraries–like <a href="https://github.com/SwiftyJSON/SwiftyJSON">SwiftyJSON</a>–to make this easier, but our needs are simple and I don&rsquo;t want to complicate things with installing external libraries (although if you do, the two main package managers for Xcode are <a href="https://github.com/Carthage/Carthage">Carthage</a> and <a href="http://cocoapods.org/">CocoaPODS</a>).</p>
+<p>Here&rsquo;s the JSON returned by OpenWeatherMap:</p>
+<pre><code class="json">{
+    &quot;coord&quot;: {
+        &quot;lon&quot;: -122.33,
+        &quot;lat&quot;: 47.6
+    },
+    &quot;sys&quot;: {
+        &quot;type&quot;: 1,
+        &quot;id&quot;: 2923,
+        &quot;message&quot;: 0.0242,
+        &quot;country&quot;: &quot;United States of America&quot;,
+        &quot;sunrise&quot;: 1426774374,
+        &quot;sunset&quot;: 1426818056
+    },
+    &quot;weather&quot;: [{
+        &quot;id&quot;: 800,
+        &quot;main&quot;: &quot;Clear&quot;,
+        &quot;description&quot;: &quot;sky is clear&quot;,
+        &quot;icon&quot;: &quot;01d&quot;
+    }],
+    &quot;base&quot;: &quot;cmc stations&quot;,
+    &quot;main&quot;: {
+        &quot;temp&quot;: 52.41,
+        &quot;pressure&quot;: 1020,
+        &quot;humidity&quot;: 76,
+        &quot;temp_min&quot;: 48.2,
+        &quot;temp_max&quot;: 57
+    },
+    &quot;wind&quot;: {
+        &quot;speed&quot;: 7.78,
+        &quot;deg&quot;: 180
+    },
+    &quot;clouds&quot;: {
+        &quot;all&quot;: 1
+    },
+    &quot;dt&quot;: 1426790612,
+    &quot;id&quot;: 5809844,
+    &quot;name&quot;: &quot;Seattle&quot;,
+    &quot;cod&quot;: 200
+}
+</code></pre>
+
+<p>There&rsquo;s a lot of information we could use here, but for now let&rsquo;s keep it simple and just take the city name, current temperature, and the weather description. Let&rsquo;s first create a place to put the weather data. In <strong>WeatherAPI.swift</strong>, add a struct at the top of the file:</p>
+<pre><code class="swift">struct Weather {
+    var city: String
+    var currentTemp: Float
+    var conditions: String
+}
+</code></pre>
+
+<p>Now add a function to parse the incoming JSON data and return a Weather object:</p>
+<pre><code class="swift">func weatherFromJSONData(data: NSData) -&gt; Weather? {
+    var err: NSError?
+    typealias JSONDict = [String:AnyObject]
+
+    if let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &amp;err) as? JSONDict {
+        var mainDict = json[&quot;main&quot;] as JSONDict
+        var weatherList = json[&quot;weather&quot;] as [JSONDict]
+        var weatherDict = weatherList[0]
+
+        var weather = Weather(
+            city: json[&quot;name&quot;] as String,
+            currentTemp: mainDict[&quot;temp&quot;] as Float,
+            conditions: weatherDict[&quot;main&quot;] as String
+        )
+
+        return weather
+    }
+    return nil
+}
+</code></pre>
+
+<p>We return an <strong>Optional(Weather)</strong> because it&rsquo;s possible the JSON may fail to parse.</p>
+<p>Now, change the <code>fetchWeather</code> function to call <code>weatherFromJSONData</code>:</p>
+<pre><code class="swift">let task = session.dataTaskWithURL(url!) { data, response, error in
+    let weather = self.weatherFromJSONData(data)
+    NSLog(&quot;\(weather)&quot;)
+}
+</code></pre>
+
+<p>If you run it now, you&rsquo;ll see that the logging isn&rsquo;t terribly helpful:</p>
+<pre><code>2015-03-19 14:58:00.758 WeatherBar[49688:1998824] Optional(WeatherBar.Weather)
+</code></pre>
+
+<p>To make our Weather struct printable, we need to implement the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/SwiftStandardLibraryReference/Printable.html">Printable</a> or <strong>DebugPrintable</strong> protocols, which just entails adding a <code>description</code> or <code>debugDescription</code> var. Let&rsquo;s do the former:</p>
+<pre><code class="swift">struct Weather: Printable {
+    var city: String
+    var currentTemp: Float
+    var conditions: String
+
+    var description: String {
+        return &quot;\(city): \(currentTemp)F and \(conditions)&quot;
+    }
+}
+</code></pre>
+
+<p>If you run it again now you&rsquo;ll see:</p>
+<pre><code>2015-03-19 15:11:49.130 WeatherBar[50731:2009152] Optional(Seattle: 58.87F and Clouds)
+</code></pre>
+
+<h2 id="step-5-getting-the-weather-into-the-controller-delegate-code-or-callback-code"><a name="user-content-step-5-getting-the-weather-into-the-controller-delegate-code-or-callback-code" href="#step-5-getting-the-weather-into-the-controller-delegate-code-or-callback-code" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Step 5: Getting the Weather into the Controller (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-05a-delegate">delegate code</a> or <a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-05b-callback">callback code</a>)</h2>
+<p>Next, let&rsquo;s actually display the weather in our app, as opposed to in the debug console.</p>
+<p>First we have the problem of how we get the weather data back into our controller. The weather API call is asynchronous, so we can&rsquo;t just call weatherAPI.fetchWeather() and expect a Weather object in return.</p>
+<p>There are two common ways to handle this. The most common pattern in MacOS and iOS programming (at least up until recently), is to use a delegate:</p>
+<p>Add the following above <code>class WeatherAPI</code>:</p>
+<pre><code class="swift">protocol WeatherAPIDelegate {
+    func weatherDidUpdate(weather: Weather)
+}
+</code></pre>
+
+<p>Add the following class variable to WeatherAPI:</p>
+<pre><code class="swift">var delegate: WeatherAPIDelegate?
+</code></pre>
+
+<p>Add an initializer fuction:</p>
+<pre><code class="swift">init(delegate: WeatherAPIDelegate) {
+    self.delegate = delegate
+}
+</code></pre>
+
+<p>And now the data fetch task in <code>fetchWeather</code> will look like this:</p>
+<pre><code class="swift">let task = session.dataTaskWithURL(url!) { data, response, error in
+    if let weather = self.weatherFromJSONData(data) {
+        self.delegate?.weatherDidUpdate(weather)
+    }
+}
+</code></pre>
+
+<p>Finally, we implement the <code>WeatherAPIDelegate</code> protocol in the controller, with a few changes noted:</p>
+<pre><code class="swift">class StatusMenuController: NSObject, WeatherAPIDelegate {
+...
+  var weatherAPI: WeatherAPI!
+
+  override func awakeFromNib() {
+    ...
+    weatherAPI = WeatherAPI(delegate: self)
+    updateWeather()
+  }
+  ...
+  func weatherDidUpdate(weather: Weather) {
+    NSLog(weather.description)
+  }
+  ...
+</code></pre>
+
+<p>However, with the relatively recent introduction of blocks to Objective-C, and Swift&rsquo;s first-class functions, a simpler way is to use callbacks:</p>
+<pre><code class="swift">func fetchWeather(query:String, success: (Weather) -&gt; Void) {
+    let session = NSURLSession.sharedSession()
+    let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+    let url = NSURL(string: BASE_URL + escapedQuery!)
+    let task = session.dataTaskWithURL(url!) { data, response, error in
+        if let weather = self.weatherFromJSONData(data) {
+            success(weather)
+        }
+    }
+    task.resume()
+}
+</code></pre>
+
+<p>Here, <code>success</code> is a function that takes a Weather object as a parameter and returns <code>Void</code> (nothing).</p>
+<p>In our controller:</p>
+<pre><code class="swift">func updateWeather() {
+    weatherAPI.fetchWeather(&quot;Seattle, WA&quot;) { weather in
+        NSLog(weather.description)
+    }
+}
+</code></pre>
+
+<h2 id="displaying-the-weather"><a name="user-content-displaying-the-weather" href="#displaying-the-weather" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Displaying the Weather</h2>
+<p>Finally, we&rsquo;ll update our menu to display the weather.</p>
+<p>In MainMenu.xib, add a new MenuItem between Update and Quit (and another separator) and rename it &ldquo;Weather&rdquo;.</p>
+<p><img alt="" src="/Users/brad/workspace/MacSwiftEtsySchool/WeatherBar/assets/weather-menu-item.png" /></p>
+<p>In your controller, in <code>updateWeather</code>, replace the <code>NSLog</code> with:</p>
+<pre><code class="swift">if let weatherMenuItem = self.statusMenu.itemWithTitle(&quot;Weather&quot;) {
+    weatherMenuItem.title = weather.description
+}
+</code></pre>
+
+<p>Run and voila!</p>
+<p>The weather is greyed out because we have no action associated with selecting it. We could have it open a web page to a detailed forecast, but instead next we&rsquo;ll make a nicer display.</p>
+<h2 id="creating-a-weather-uiview"><a name="user-content-creating-a-weather-uiview" href="#creating-a-weather-uiview" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Creating a Weather UIView</h2>
+<p>Open MainMenu.xib.</p>
+<p>Drag a Custom View onto the page.</p>
+<p>Drag a Image View into the upper left corner of the view, and in the Image View&rsquo;s Size Inspector, set the width and height to 50.</p>
+<p>Add Labels for city and current temperature/conditions (we&rsquo;ll use one label for both temperature and conditions).</p>
+<p>Adjust the view size down to about 265 x 90 (you can set that in the Image View&rsquo;s Size Inspector). It should look roughly like this:</p>
+<p><img alt="" src="assets/image-view.png" /></p>
+<p>New File ⟶ Source ⟶ Cocoa Class, name it WeatherView and make it a subclass of NSView, and save. The file will contain a stub <code>drawRect</code> method which you can delete.</p>
+<p>Back in MainMenu.xib, click on the View, and in the Identity Inspector, set the class to &ldquo;WeatherView&rdquo;. Now use the Assistant editor to bring up the xib and class file side-by-side, and then ctrl-drag from the xib to create outlets for each of the elements in the view. WeatherView.swift should look like:</p>
+<pre><code class="swift">import Cocoa
+
+class WeatherView: NSView {
+    @IBOutlet weak var imageView: NSImageView!
+    @IBOutlet weak var cityTextField: NSTextField!
+    @IBOutlet weak var currentConditionsTextField: NSTextField!
+}
+</code></pre>
+
+<p>Now add a method to WeatherView so we can update it with a Weather object:</p>
+<pre><code class="swift">    func update(weather: Weather) {
+        cityTextField.stringValue = weather.city
+        currentConditionsTextField.stringValue = &quot;\(Int(weather.currentTemp))°F and \(weather.conditions)&quot;
+    }
+</code></pre>
+
+<p>Now bring up StatusMenuController in the Assistant editor, and ctrl-drag from the Weather View object over to the top of the StatusMenuController class to create a <code>weatherView</code> outlet. While we&rsquo;re there, we&rsquo;re going to add a <code>weatherMenuItem</code> class var:</p>
+<pre><code class="swift">class StatusMenuController: NSObject {
+    @IBOutlet weak var statusMenu: NSMenu!
+    @IBOutlet weak var weatherView: WeatherView!
+    var weatherMenuItem: NSMenuItem!
+    ...
+</code></pre>
+
+<p>In StatusMenuController&rsquo;s <code>awakeFromNib</code> method, right before the call to <code>updateWeather</code>, add:</p>
+<pre><code class="swift">// load WeatherView
+weatherMenuItem = statusMenu.itemWithTitle(&quot;Weather&quot;)
+weatherMenuItem.view = weatherView
+</code></pre>
+
+<p>And now <code>updateWeather</code> is even simpler:</p>
+<pre><code class="swift">func updateWeather() {
+    weatherAPI.fetchWeather(&quot;Seattle, WA&quot;) { weather in
+        self.weatherView.update(weather)
+    }
+}
+</code></pre>
+
+<p>Run it!</p>
+<h2 id="adding-the-weather-image"><a name="user-content-adding-the-weather-image" href="#adding-the-weather-image" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Adding the Weather Image</h2>
+<p>So, we&rsquo;re obviously missing something in our weather view. Let&rsquo;s update it with the appropriate weather image.</p>
+<p>The images for the various weather conditions can be found at <a href="http://openweathermap.org/weather-conditions">http://openweathermap.org/weather-conditions</a>, but I&rsquo;ve put them in a <a href="/Users/brad/workspace/MacSwiftEtsySchool/WeatherBar/assets/weather-icons.zip">zip file</a> for you. You can just unzip that and drag the whole folder into Images.xcassets.</p>
+<p>We need to update WeatherAPI to capture the icon code. In the Weather struct, add:</p>
+<pre><code class="swift">var icon: String
+</code></pre>
+
+<p>and in <code>weatherFromJSONData</code>, add that to the Weather initialization:</p>
+<pre><code class="swift">var weather = Weather(
+    city: json[&quot;name&quot;] as String,
+    currentTemp: mainDict[&quot;temp&quot;] as Float,
+    conditions: weatherDict[&quot;main&quot;] as String,
+    icon: weatherDict[&quot;icon&quot;] as String
+)
+</code></pre>
+
+<p>Now in the <code>update</code> method of WeatherView, add:</p>
+<pre><code class="swift">imageView.image = NSImage(named: weather.icon)
+</code></pre>
+
+<p>That&rsquo;s it! Run it.</p>
+<h2 id="preferences"><a name="user-content-preferences" href="#preferences" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Preferences</h2>
+<p>Having the city hard-coded in the app is not cool. Let&rsquo;s make a Preferences pane so we can change it.</p>
+<p>Open up MainMenu.xib and drag another MenuItem onto the menu, above Quit, naming it &ldquo;Preferences&hellip;&rdquo;.</p>
+<p>Open up the Assistant editor again with StatusMenuController, and ctrl-drag from the Preferences menu item over to the code and create a &ldquo;preferencesClicked&rdquo; action.</p>
+<p>New ⟶ File ⟶ Source ⟶ Cocoa Class. Call it &ldquo;PreferencesWindow&rdquo;, set the subclass to NSWindowController, and check the box to create a XIB file.</p>
+<p>Give the window a title of Preferences. Add a label for &ldquo;City:&rdquo;, and put a Text Field to the right of it. It should look something like this:</p>
+<p><img alt="" src="/Users/brad/workspace/MacSwiftEtsySchool/WeatherBar/assets/preferences.png" /></p>
+<p>Bring up the Assistant editor with PreferencesWindow.swift and ctrl-drag from the text field to the code and create an outlet named &ldquo;cityTextField&rdquo;.</p>
+<p>In PreferencesWindow.swift, add:</p>
+<pre><code class="swift">override var windowNibName : String! {
+    return &quot;PreferencesWindow&quot;
+}
+</code></pre>
+
+<p>and at the end of <code>windowDidLoad()</code>, add:</p>
+<pre><code class="swift">self.window?.center()
+</code></pre>
+
+<p>In StatusMenuController.swift, add a <code>preferencesWindow</code> class var:</p>
+<pre><code class="swift">var preferencesWindow: PreferencesWindow!
+</code></pre>
+
+<p>and initialize in <code>awakeFromNib()</code>, before the call to <code>updateWeather()</code>:</p>
+<pre><code class="swift">preferencesWindow = PreferencesWindow()
+</code></pre>
+
+<p>Finally, in the <code>preferencesClicked</code> function, add:</p>
+<pre><code class="swift">preferencesWindow.showWindow(nil)
+</code></pre>
+
+<p>If you run now, selecting the Preferences&hellip; menu item should bring up the preferences window.</p>
+<p>Now, let&rsquo;s actually save and update the city.</p>
+<p>Make the PreferencesWindow class an <code>NSWindowDelegate</code>:</p>
+<pre><code class="swift">class PreferencesWindow: NSWindowController, NSWindowDelegate {
+</code></pre>
+
+<p>and add:</p>
+<pre><code class="swift">func windowWillClose(notification: NSNotification) {
+    NSLog(&quot;city is: &quot; + cityTextField.stringValue)
+}
+</code></pre>
+
+<p>If you run it now, you&rsquo;ll see whatever you typed in the text field displayed when you close the window.</p>
+<p>Saving the value is easy:</p>
+<pre><code class="swift">func windowWillClose(notification: NSNotification) {
+    let defaults = NSUserDefaults.standardUserDefaults()
+    defaults.setValue(cityTextField.stringValue, forKey: &quot;city&quot;)
+}
+</code></pre>
+
+<p>Now we need to notify the StatusMenuController that the preferences have been updated. For this we&rsquo;ll use the Delegate pattern. This is easy, but requires a number of edits. First, at the top of PreferencesWindow.swift, add a <code>PreferencesWindowDelegate</code> protocol:</p>
+<pre><code class="swift">protocol PreferencesWindowDelegate {
+    func preferencesDidUpdate()
+}
+</code></pre>
+
+<p>and add a <code>delegate</code> instance variable:</p>
+<pre><code class="swift">var delegate: PreferencesWindowDelegate?
+</code></pre>
+
+<p>At the end of <code>windowWillClose</code>, we&rsquo;ll call the delegate:</p>
+<pre><code class="swift">delegate?.preferencesDidUpdate()
+</code></pre>
+
+<p>Back in StatusMenuController, make it a <code>PreferencesWindowDelegate</code>:</p>
+<pre><code class="swift">class StatusMenuController: NSObject, PreferencesWindowDelegate {
+</code></pre>
+
+<p>and add the delegate method:</p>
+<pre><code class="swift">func preferencesDidUpdate() {
+    updateWeather()
+}
+</code></pre>
+
+<p>And in <code>awakeFromNib</code>, set the delegate:</p>
+<pre><code class="swift">preferencesWindow = PreferencesWindow()
+preferencesWindow.delegate = self
+</code></pre>
+
+<p>All that&rsquo;s left is to load the city from defaults. First add this at the top of StatusMenuController, under the imports:</p>
+<pre><code class="swift">let DEFAULT_CITY = &quot;Seattle, WA&quot;
+</code></pre>
+
+<p>(&hellip;or whatever you want the default to be.) Yes, this is a global variable, and there are probably better ways to do this (like storing it in Info.plist), but that can be left as an exercise for the reader.</p>
+<p>Load the saved city, or default, in <code>updateWeather</code>:</p>
+<pre><code class="swift">func updateWeather() {
+    let defaults = NSUserDefaults.standardUserDefaults()
+    let city = defaults.stringForKey(&quot;city&quot;) ?? DEFAULT_CITY
+    weatherAPI.fetchWeather(city) { weather in
+        self.weatherView.update(weather)
+    }
+}
+</code></pre>
+
+<p>Finally, back in PreferencesWindow.swift, we need to add similar code to load any saved city when we show the preferences. At the end of <code>windowDidLoad</code>, add:</p>
+<pre><code class="swift">let defaults = NSUserDefaults.standardUserDefaults()
+let city = defaults.stringForKey(&quot;city&quot;) ?? DEFAULT_CITY
+cityTextField.stringValue = city
+</code></pre>
+
+<p>Run it!</p>
+<h2 id="next-steps"><a name="user-content-next-steps" href="#next-steps" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Next Steps</h2>
+<p>That&rsquo;s the end of this tutorial. Obviously there&rsquo;s a lot more that we can do with this, but I&rsquo;ll leave that up to you. Some ideas:</p>
+<ul>
+<li>Easy<ul>
+<li>Add other weather info (high/low temp, humidity, sunrise/sunset, etc) to the Weather View</li>
+<li>Change the status menu icon + title to reflect the current conditions</li>
+<li>Make it so clicking on the Weather View opens a browser with detailed weather information (easy, if you have a url to go to; hint: <code>NSWorkspace.sharedWorkspace().openURL(url: NSURL)</code>)</li>
+<li>Add an app icon. This isn&rsquo;t hard, but it can be a pain creating the <a href="https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Optimizing/Optimizing.html">various sizes that Apple wants</a>. Fortunately, there are <a href="https://itunes.apple.com/us/app/asset-catalog-creator-app/id809625456?mt=12">tools to make this easier</a>.</li>
+</ul>
+</li>
+<li>More Challenging<ul>
+<li>Add support for multiple cities. This will take some effort, especially if the number of cities is dynamic. I think you&rsquo;ll have to put the Weather View in its own XIB, and load it manually (look at <code>NSBundle.mainBundle().loadNibNamed(name, owner: owner, options: options)</code>). The UI in Preferences will need to be updated as well.</li>
+</ul>
+</li>
+<li>You Know Way More Than Me Now<ul>
+<li>Create a completely custom view when clicking on the app in the status bar. See the <a href="https://itunes.apple.com/us/app/weather-live/id755717884?mt=12">Weather Live</a> app, for example. I haven&rsquo;t tried this, but I suspect it is easier than you might think (depending on how fancy your view is, of course).</li>
+</ul>
+</li>
+</ul>
+<h2 id="resources"><a name="user-content-resources" href="#resources" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Resources</h2>
+<ul>
+<li><a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/">The Swift Programming Language</a><ul>
+<li>Apple&rsquo;s documentation, also downloadable as a <a href="https://itunes.apple.com/us/book/the-swift-programming-language/id881256329?mt=11">free iBook</a></li>
+</ul>
+</li>
+<li><a href="https://developer.apple.com/devcenter/mac/">Mac Dev Center</a><ul>
+<li>Mac developer account is free, but you need to pay $99/year if you want to distribute your app in the app store.</li>
+</ul>
+</li>
+<li><a href="https://developer.apple.com/library/mac/documentation/UserExperience/Conceptual/OSXHIGuidelines/">OS X Human Interface Guidelines</a>&rsquo;&lsquo;</li>
+</ul></article></body></html>

@@ -91,7 +91,7 @@ header h2 {
 
 .inner {
   position: relative;
-  width: 940px;
+  width: 1000px;
   margin: 0 auto;
 }
 
@@ -101,7 +101,7 @@ header h2 {
 }
 
 #main-content {
-  width: 690px;
+  width: 780px;
   float: left;
 }
 
@@ -477,3 +477,25 @@ footer a:hover {
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) {}
+
+/* customizations */
+
+caption {
+  text-align: left;
+  font-size: 80%;
+  margin-bottom: 1em;
+}
+
+table.image {
+  width: initial;
+  border: none;
+}
+
+table.image td {
+  text-align: left;
+  border: none;
+}
+
+strong {
+  font-weight: bold;
+}
