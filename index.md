@@ -14,7 +14,7 @@ The complete code can be found at https://github.etsycorp.com/bgreenlee/WeatherB
 
 Technically, they're Status Bar apps, but most people outside of Apple will refer to them as Menu Bar apps.
 
-{% include image.html url="assets/squeeler.png" description="Squeeler, an app I wrote to warn of processes using excessive CPU." %}
+![](assets/squeeler.png)
 
 Menu Bar apps are great for creating quick utilities. Because the UI is fairly constrained, they are easy to design and create. They're especially well-suited for processes that run in the background, or for quick reference.
 
