@@ -499,3 +499,19 @@ table.image td {
 strong {
   font-weight: bold;
 }
+
+pre {
+  padding: 10px;
+}
+
+pre, code.hljs {
+  background: #fdfdfd;
+}
+
+code, pre {
+  margin-bottom: 0;
+}
+
+p {
+  margin-top: 10px;
+}
