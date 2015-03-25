@@ -8,7 +8,7 @@ This tutorial will walk you through writing a Mac Menu Bar (aka Status Bar) app,
 
 ![](assets/weatherbar.png)
 
-The complete code can be found at https://github.etsycorp.com/bgreenlee/WeatherBar, with step of the tutorial in its own branch.
+The complete code can be found at https://github.com/bgreenlee/WeatherBar, with step of the tutorial in its own branch.
 
 ## What's a Menu Bar App and Why Would I Want to Write One?
 
@@ -22,7 +22,7 @@ Menu Bar apps are great for creating quick utilities. Because the UI is fairly c
 
 You should have the latest stable version of [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12). At the time of this writing, that is 6.2. As Swift is a language still under heavy development, it's not unlikely that the code written here may fail to compile on earlier or later versions. I'll try to keep this up-to-date, but if you find any errors, please [let me know](mailto:brad@footle.org).
 
-## Let's Get Something Running ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-00))
+## Let's Get Something Running ([code](https://github.com/bgreenlee/WeatherBar/tree/step-00))
 
 Open Xcode.
 
@@ -81,7 +81,7 @@ NSApplication.sharedApplication().terminate(self)
 
 Run it! You have a working menu bar app.
 
-## Make it Look Like a Real Menu Bar App ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-01-icon))
+## Make it Look Like a Real Menu Bar App ([code](https://github.com/bgreenlee/WeatherBar/tree/step-01-icon))
 
 You might have noticed an icon shows up in your Dock when you ran your app. You also get the default application menus on the left side of the status bar. Menu bar apps don't need either of those, so let's get rid of them.
 
@@ -114,7 +114,7 @@ Delete the `statusItem.title` line.
 
 Try running it again.
 
-## Reorganize ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-02-reorg))
+## Reorganize ([code](https://github.com/bgreenlee/WeatherBar/tree/step-02-reorg))
 
 Before we add more code, we should find a better place to put it. The AppDelegate is really meant to be used only for handling application lifecycle events. We *could* dump all our code in there, but at some point you're going to hate yourself.
 
@@ -157,7 +157,7 @@ Finally, right-click on the App Delegate object and click the X next to the stat
 
 Now, when the application is launched and the **StatusMenu.xib** is instantiated, our StatusMenuController will receive `awakeFromNib`, and we can do what we need to initialize the status menu.
 
-## Step 3: Calling the API ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-03-api))
+## Step 3: Calling the API ([code](https://github.com/bgreenlee/WeatherBar/tree/step-03-api))
 
 The next thing we need is something to manage communication with the weather API.
 
@@ -232,7 +232,7 @@ class StatusMenuController: NSObject {
 }
 ~~~
 
-## Parsing JSON ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-04-json-parsing))
+## Parsing JSON ([code](https://github.com/bgreenlee/WeatherBar/tree/step-04-json-parsing))
 
 Parsing JSON is a little awkward in Swift, and people have written libraries–like [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)–to make this easier, but our needs are simple and I don't want to complicate things with installing external libraries (although if you do, the two main package managers for Xcode are [Carthage](https://github.com/Carthage/Carthage) and [CocoaPODS](http://cocoapods.org/)).
 
@@ -351,7 +351,7 @@ If you run it again now you'll see:
 2015-03-19 15:11:49.130 WeatherBar[50731:2009152] Optional(Seattle: 58.87F and Clouds)
 ~~~
 
-## Getting the Weather into the Controller ([delegate code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-05a-delegate) or [callback code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-05b-callback))
+## Getting the Weather into the Controller ([delegate code](https://github.com/bgreenlee/WeatherBar/tree/step-05a-delegate) or [callback code](https://github.com/bgreenlee/WeatherBar/tree/step-05b-callback))
 
 Next, let's actually display the weather in our app, as opposed to in the debug console.
 
@@ -439,7 +439,7 @@ func updateWeather() {
 ~~~
 
 
-## Displaying the Weather ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-06-displaying))
+## Displaying the Weather ([code](https://github.com/bgreenlee/WeatherBar/tree/step-06-displaying))
 
 Finally, we'll update our menu to display the weather.
 
@@ -459,7 +459,7 @@ Run and voila!
 
 The weather is greyed out because we have no action associated with selecting it. We could have it open a web page to a detailed forecast, but instead next we'll make a nicer display.
 
-## Creating a Weather View ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-07-weather-view))
+## Creating a Weather View ([code](https://github.com/bgreenlee/WeatherBar/tree/step-07-weather-view))
 
 Open MainMenu.xib.
 
@@ -525,7 +525,7 @@ func updateWeather() {
 
 Run it!
 
-## Adding the Weather Image ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-08-weather-image))
+## Adding the Weather Image ([code](https://github.com/bgreenlee/WeatherBar/tree/step-08-weather-image))
 
 So, we're obviously missing something in our weather view. Let's update it with the appropriate weather image.
 
@@ -556,7 +556,7 @@ imageView.image = NSImage(named: weather.icon)
 
 That's it! Run it.
 
-## Preferences ([code](https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-09-preferences))
+## Preferences ([code](https://github.com/bgreenlee/WeatherBar/tree/step-09-preferences))
 
 Having the city hard-coded in the app is not cool. Let's make a Preferences pane so we can change it.
 
@@ -744,4 +744,4 @@ That's the end of this tutorial. Obviously there's a lot more that we can do wit
 
 ## Contact
 
-Got questions, feedback, or corrections? [Hit me up!](mailto:brad@footle.org) (You can also submit and [issue](https://github.etsycorp.com/bgreenlee/WeatherBar/issues) or [pull request](https://github.etsycorp.com/bgreenlee/WeatherBar/pulls).)
+Got questions, feedback, or corrections? [Hit me up!](mailto:brad@footle.org) (You can also submit and [issue](https://github.com/bgreenlee/WeatherBar/issues) or [pull request](https://github.com/bgreenlee/WeatherBar/pulls).)
