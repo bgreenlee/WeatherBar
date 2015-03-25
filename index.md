@@ -714,11 +714,13 @@ That's the end of this tutorial. Obviously there's a lot more that we can do wit
 
 - Add other weather info (high/low temp, humidity, sunrise/sunset, etc) to the Weather View
 - Change the status menu icon + title to reflect the current conditions
+- Add a timer to update the weather regularly (hint: `NSRunLoop.mainRunLoop().addTimer(refreshTimer!, forMode: NSRunLoopCommonModes)`).
 - Make it so clicking on the Weather View opens a browser with detailed weather information (hint: `NSWorkspace.sharedWorkspace().openURL(url: NSURL)`). Note that since we're using a custom view, the menu item isn't highlighted when you mouse over it, so you'll probably want to do something to make it obvious that it is clickable.
 - Add some error handling. Right now if we get an unexpected response from the API, for example, bad things will happen.
 - [Write some tests!](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/Introduction/Introduction.html#//apple_ref/doc/uid/TP40014132-CH1-SW1)
 - Add an app icon. This isn't hard, but it can be a pain creating the [various sizes that Apple wants](https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Optimizing/Optimizing.html). Fortunately, there are [tools to make this easier](https://itunes.apple.com/us/app/asset-catalog-creator-app/id809625456?mt=12).
 - Add a preference to launch the app on login. I've used the [LaunchAtLoginController](https://github.com/Mozketo/LaunchAtLoginController) library in other apps. There's also [this blog post](http://bdunagan.com/2010/09/25/cocoa-tip-enabling-launch-on-startup/), if you want to try porting the code over to Swift.
+- Create an About window.
 
 ### More Challenging
 
@@ -737,6 +739,8 @@ That's the end of this tutorial. Obviously there's a lot more that we can do wit
 **[NSHipster](http://nshipster.com/)** - Tons of great, in-depth articles on Objective-C, Swift, and Cocoa
 
 **[Ray Wenderlich's Tutorials](http://www.raywenderlich.com/tutorials)** - Puts this tutorial to shame.
+
+**[Mike Ash's NSBlog](https://mikeash.com/pyblog/)** - Great deep dives into Objective-C and Swift
 
 ## Contact
 
