@@ -30,7 +30,7 @@ Create a New Project or *File ⟶ New ⟶ Project*
 
 Choose *Application ⟶ Cocoa Application* under OS X and click Next
 
-Product Name: *WeatherBar*, Language *Swift*, uncheck *Use Storyboards*. Organization name and identifier are not important at this stage. Make something up if you like.
+Product Name: *WeatherBar*, Language *Swift*, uncheck *Use Storyboards*. Organization name and identifier are not important at this stage. Make something up if you like. (But you probably should use something other than Etsy.)
 
 ![](assets/new-project.png)
 
