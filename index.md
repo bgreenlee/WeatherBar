@@ -8,7 +8,7 @@ This tutorial will walk you through writing a Mac Menu Bar (aka Status Bar) app,
 
 ![](assets/weatherbar.png)
 
-The complete code can be found at https://github.com/bgreenlee/WeatherBar, with step of the tutorial in its own branch.
+The complete code can be found at <https://github.com/bgreenlee/WeatherBar>, with step of the tutorial in its own branch.
 
 ## What's a Menu Bar App and Why Would I Want to Write One?
 
