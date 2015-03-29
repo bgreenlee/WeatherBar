@@ -2,6 +2,7 @@
 layout: default
 ---
 
+
 This tutorial will walk you through writing a Mac Menu Bar (aka Status Bar) app, using [Swift](https://developer.apple.com/swift/). We'll build a simple weather app using data from [OpenWeatherMap](http://openweathermap.org/). In the end, it will look like this:
 
 ![](assets/weatherbar.png)
