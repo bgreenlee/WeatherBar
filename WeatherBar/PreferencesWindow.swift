@@ -23,13 +23,14 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-        self.window?.center()
-        self.window?.makeKeyAndOrderFront(nil)
         
         let defaults = NSUserDefaults.standardUserDefaults()
         let city = defaults.stringForKey("city") ?? DEFAULT_CITY
         cityTextField.stringValue = city
+
+        self.window?.center()
+        self.window?.makeKeyAndOrderFront(nil)
+        NSApp.activateIgnoringOtherApps(true)
     }
     
     func windowWillClose(notification: NSNotification) {
