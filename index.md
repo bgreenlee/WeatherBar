@@ -586,6 +586,7 @@ and at the end of `windowDidLoad()`, add:
 ~~~ swift
 self.window?.center()
 self.window?.makeKeyAndOrderFront(nil)
+NSApp.activateIgnoringOtherApps(true)
 ~~~
 
 In **StatusMenuController.swift**, add a `preferencesWindow` class var:
