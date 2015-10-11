@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Weather: Printable {
+struct Weather: CustomStringConvertible {
     var city: String
     var currentTemp: Float
     var conditions: String
@@ -27,31 +27,32 @@ class WeatherAPI {
         let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         let url = NSURL(string: BASE_URL + escapedQuery!)
         let task = session.dataTaskWithURL(url!) { data, response, error in
-            if let weather = self.weatherFromJSONData(data) {
+            if let weather = self.weatherFromJSONData(data!) {
                 success(weather)
             }
         }
-        task.resume()
+        task!.resume()
     }
 
-    func weatherFromJSONData(data: NSData) -> Weather? {
-        var err: NSError?
+    func weatherFromJSONData(data: NSData) throws -> Weather? {
         typealias JSONDict = [String:AnyObject]
 
-        if let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &err) as? JSONDict {
-            var mainDict = json["main"] as JSONDict
-            var weatherList = json["weather"] as [JSONDict]
+        do {
+            let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as! JSONDict
+            var mainDict = json["main"] as! JSONDict
+            var weatherList = json["weather"] as! [JSONDict]
             var weatherDict = weatherList[0]
 
-            var weather = Weather(
-                city: json["name"] as String,
-                currentTemp: mainDict["temp"] as Float,
-                conditions: weatherDict["main"] as String,
-                icon: weatherDict["icon"] as String
+            let weather = Weather(
+                city: json["name"] as! String,
+                currentTemp: mainDict["temp"] as! Float,
+                conditions: weatherDict["main"] as! String,
+                icon: weatherDict["icon"] as! String
             )
-
             return weather
+        } catch let error as NSError {
+            print("A JSON parsing error occurred: \(error)")
         }
-        return nil
+        throw
     }
 }
