@@ -259,7 +259,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 <p>The next thing we need is something to manage communication with the weather API.</p>
 
-<p>File ⟶ New File ⟶ OS X Source ⟶ Swift File ⟶ WeatherAPI.swift, and add the following, making sure you insert your API key.</p>
+<p>File ⟶ New File ⟶ OS X Source ⟶ Swift File ⟶ WeatherAPI.swift, and add the following, <strong>making sure you insert your API key</strong>.</p>
 
 <pre><code class="language-swift">import Foundation
 
@@ -273,11 +273,22 @@ class WeatherAPI {
         let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         let url = NSURL(string: "\(BASE_URL)?APPID=\(API_KEY)&amp;units=imperial&amp;q=\(escapedQuery!)")
         let task = session.dataTaskWithURL(url!) { data, response, error in
-            if let responseError = error {
-                NSLog("error: %s", responseError)
-            } else {
-                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
-                NSLog(dataString)
+            // first check for a hard error
+            if let error = err {
+                NSLog("weather api error: \(error)")
+            }
+
+            // then check the response code
+            if let httpResponse = response as? NSHTTPURLResponse {
+                switch httpResponse.statusCode {
+                case 200: // all good!
+                    let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
+                    NSLog(dataString)
+                case 401: // unauthorized
+                    NSLog("weather api returned an 'unauthorized' response. Did you set your API key?")
+                default:
+                    NSLog("weather api returned response: %d %@", httpResponse.statusCode, NSHTTPURLResponse.localizedStringForStatusCode(httpResponse.statusCode))
+                }
             }
         }
         task.resume()
@@ -424,17 +435,28 @@ class StatusMenuController: NSObject {
 
 <p>We return an <em>Optional(Weather)</em> because it’s possible the JSON may fail to parse.</p>
 
-<p>Now, change the <code>fetchWeather</code> function to call <code>weatherFromJSONData</code>:</p>
+<p>Now, change the <code>fetchWeather</code> function to call <code>weatherFromJSONData</code> (lines 11-13):</p>
 
-<pre><code class="language-swift">let task = session.dataTaskWithURL(url!) { data, response, error in
-    if let responseError = error {
-        NSLog("error: %s", responseError)
-    } else {
-        let weather = self.weatherFromJSONData(data!)
-        NSLog("\(weather)")
-    }
-}
-</code></pre>
+<div class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="lineno"> 1</span> <span class="k">let</span> <span class="n">task</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">dataTaskWithURL</span><span class="p">(</span><span class="n">url</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+<span class="lineno"> 2</span>         <span class="c1">// first check for a hard error</span>
+<span class="lineno"> 3</span>     <span class="k">if</span> <span class="k">let</span> <span class="n">error</span> <span class="o">=</span> <span class="n">err</span> <span class="p">{</span>
+<span class="lineno"> 4</span>         <span class="n">NSLog</span><span class="p">(</span><span class="s">&quot;weather api error: \(error)&quot;</span><span class="p">)</span>
+<span class="lineno"> 5</span>     <span class="p">}</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span>     <span class="c1">// then check the response code</span>
+<span class="lineno"> 8</span>     <span class="k">if</span> <span class="k">let</span> <span class="n">httpResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="kt">as</span><span class="o">?</span> <span class="bp">NSHTTPURLResponse</span> <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="k">switch</span> <span class="n">httpResponse</span><span class="p">.</span><span class="n">statusCode</span> <span class="p">{</span>
+<span class="lineno">10</span>         <span class="k">case</span> <span class="mi">200</span><span class="o">:</span> <span class="c1">// all good!</span>
+<span class="lineno">11</span>             <span class="k">if</span> <span class="k">let</span> <span class="n">weather</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">weatherFromJSONData</span><span class="p">(</span><span class="n">data</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">12</span>                 <span class="n">NSLog</span><span class="p">(</span><span class="s">&quot;\(weather)&quot;</span><span class="p">)</span>
+<span class="lineno">13</span>             <span class="p">}</span>
+<span class="lineno">14</span>         <span class="k">case</span> <span class="mi">401</span><span class="o">:</span> <span class="c1">// unauthorized</span>
+<span class="lineno">15</span>             <span class="n">NSLog</span><span class="p">(</span><span class="s">&quot;weather api returned an &#39;unauthorized&#39; response. Did you set your API key?&quot;</span><span class="p">)</span>
+<span class="lineno">16</span>         <span class="k">default</span><span class="o">:</span>
+<span class="lineno">17</span>             <span class="n">NSLog</span><span class="p">(</span><span class="s">&quot;weather api returned response: %d %@&quot;</span><span class="p">,</span> <span class="n">httpResponse</span><span class="p">.</span><span class="n">statusCode</span><span class="p">,</span> <span class="bp">NSHTTPURLResponse</span><span class="p">.</span><span class="n">localizedStringForStatusCode</span><span class="p">(</span><span class="n">httpResponse</span><span class="p">.</span><span class="n">statusCode</span><span class="p">))</span>
+<span class="lineno">18</span>         <span class="p">}</span>
+<span class="lineno">19</span>     <span class="p">}</span>
+<span class="lineno">20</span> <span class="p">}</span></code></pre></div>
 
 <p>If you run it now, you’ll see something like this:</p>
 
@@ -488,16 +510,28 @@ class StatusMenuController: NSObject {
 }
 </code></pre>
 
-<p>And now the data fetch task in <code>fetchWeather</code> will look like this:</p>
+<p>And now the data fetch task in <code>fetchWeather</code> will look like this (line 12 below):</p>
 
-<pre><code class="language-swift">let task = session.dataTaskWithURL(url!) { data, response, error in
-    if let responseError = error {
-        NSLog("error: %s", responseError)
-    } else if let weather = self.weatherFromJSONData(data!) {
-        self.delegate?.weatherDidUpdate(weather)
-    }
-}
-</code></pre>
+<div class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="lineno"> 1</span> <span class="k">let</span> <span class="n">task</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">dataTaskWithURL</span><span class="p">(</span><span class="n">url</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+<span class="lineno"> 2</span>     <span class="c1">// first check for a hard error</span>
+<span class="lineno"> 3</span>     <span class="k">if</span> <span class="k">let</span> <span class="n">error</span> <span class="o">=</span> <span class="n">err</span> <span class="p">{</span>
+<span class="lineno"> 4</span>         <span class="n">NSLog</span><span class="p">(</span><span class="s">&quot;weather api error: \(error)&quot;</span><span class="p">)</span>
+<span class="lineno"> 5</span>     <span class="p">}</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span>     <span class="c1">// then check the response code</span>
+<span class="lineno"> 8</span>     <span class="k">if</span> <span class="k">let</span> <span class="n">httpResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="kt">as</span><span class="o">?</span> <span class="bp">NSHTTPURLResponse</span> <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="k">switch</span> <span class="n">httpResponse</span><span class="p">.</span><span class="n">statusCode</span> <span class="p">{</span>
+<span class="lineno">10</span>         <span class="k">case</span> <span class="mi">200</span><span class="o">:</span> <span class="c1">// all good!</span>
+<span class="lineno">11</span>             <span class="k">if</span> <span class="k">let</span> <span class="n">weather</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">weatherFromJSONData</span><span class="p">(</span><span class="n">data</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">12</span>                 <span class="nb">self</span><span class="p">.</span><span class="n">delegate</span><span class="o">?</span><span class="p">.</span><span class="n">weatherDidUpdate</span><span class="p">(</span><span class="n">weather</span><span class="p">)</span>
+<span class="lineno">13</span>             <span class="p">}</span>
+<span class="lineno">14</span>         <span class="k">case</span> <span class="mi">401</span><span class="o">:</span> <span class="c1">// unauthorized</span>
+<span class="lineno">15</span>             <span class="n">NSLog</span><span class="p">(</span><span class="s">&quot;weather api returned an &#39;unauthorized&#39; response. Did you set your API key?&quot;</span><span class="p">)</span>
+<span class="lineno">16</span>         <span class="k">default</span><span class="o">:</span>
+<span class="lineno">17</span>             <span class="n">NSLog</span><span class="p">(</span><span class="s">&quot;weather api returned response: %d %@&quot;</span><span class="p">,</span> <span class="n">httpResponse</span><span class="p">.</span><span class="n">statusCode</span><span class="p">,</span> <span class="bp">NSHTTPURLResponse</span><span class="p">.</span><span class="n">localizedStringForStatusCode</span><span class="p">(</span><span class="n">httpResponse</span><span class="p">.</span><span class="n">statusCode</span><span class="p">))</span>
+<span class="lineno">18</span>         <span class="p">}</span>
+<span class="lineno">19</span>     <span class="p">}</span>
+<span class="lineno">20</span> <span class="p">}</span></code></pre></div>
 
 <p>Finally, we implement the <code>WeatherAPIDelegate</code> protocol in the <em>StatusMenuController</em>, with a few changes noted:</p>
 
@@ -521,23 +555,28 @@ class StatusMenuController: NSObject {
 
 <p>With the relatively recent introduction of blocks to Objective-C, and Swift’s first-class functions, a simpler way is to use callbacks. (If you implemented the delegate changes above, go ahead and back them out first.)</p>
 
-<p>Change the <code>fetchWeather</code> method in <em>WeatherAPI.swift</em> to look like this:</p>
+<p>Change the data-fetching task in the <code>fetchWeather</code> method in <em>WeatherAPI.swift</em> to look like this (line 12):</p>
 
-<pre><code class="language-swift">func fetchWeather(query:String, success: (Weather) -&gt; Void) {
-    let session = NSURLSession.sharedSession()
-    // url-escape the query string we're passed
-    let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-    let url = NSURL(string: "\(BASE_URL)?APPID=\(API_KEY)&amp;units=imperial&amp;q=\(escapedQuery!)")
-    let task = session.dataTaskWithURL(url!) { data, response, error in
-        if let responseError = error {
-            NSLog("error: %s", responseError)
-        } else if let weather = self.weatherFromJSONData(data!) {
-            success(weather)
-        }
-    }
-    task.resume()
-}
-</code></pre>
+<div class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="lineno"> 1</span> <span class="k">let</span> <span class="n">task</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">dataTaskWithURL</span><span class="p">(</span><span class="n">url</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+<span class="lineno"> 2</span>     <span class="c1">// first check for a hard error</span>
+<span class="lineno"> 3</span>     <span class="k">if</span> <span class="k">let</span> <span class="n">error</span> <span class="o">=</span> <span class="n">err</span> <span class="p">{</span>
+<span class="lineno"> 4</span>         <span class="n">NSLog</span><span class="p">(</span><span class="s">&quot;weather api error: \(error)&quot;</span><span class="p">)</span>
+<span class="lineno"> 5</span>     <span class="p">}</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span>     <span class="c1">// then check the response code</span>
+<span class="lineno"> 8</span>     <span class="k">if</span> <span class="k">let</span> <span class="n">httpResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="kt">as</span><span class="o">?</span> <span class="bp">NSHTTPURLResponse</span> <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="k">switch</span> <span class="n">httpResponse</span><span class="p">.</span><span class="n">statusCode</span> <span class="p">{</span>
+<span class="lineno">10</span>         <span class="k">case</span> <span class="mi">200</span><span class="o">:</span> <span class="c1">// all good!</span>
+<span class="lineno">11</span>             <span class="k">if</span> <span class="k">let</span> <span class="n">weather</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">weatherFromJSONData</span><span class="p">(</span><span class="n">data</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">12</span>                 <span class="n">success</span><span class="p">(</span><span class="n">weather</span><span class="p">)</span>
+<span class="lineno">13</span>             <span class="p">}</span>
+<span class="lineno">14</span>         <span class="k">case</span> <span class="mi">401</span><span class="o">:</span> <span class="c1">// unauthorized</span>
+<span class="lineno">15</span>             <span class="n">NSLog</span><span class="p">(</span><span class="s">&quot;weather api returned an &#39;unauthorized&#39; response. Did you set your API key?&quot;</span><span class="p">)</span>
+<span class="lineno">16</span>         <span class="k">default</span><span class="o">:</span>
+<span class="lineno">17</span>             <span class="n">NSLog</span><span class="p">(</span><span class="s">&quot;weather api returned response: %d %@&quot;</span><span class="p">,</span> <span class="n">httpResponse</span><span class="p">.</span><span class="n">statusCode</span><span class="p">,</span> <span class="bp">NSHTTPURLResponse</span><span class="p">.</span><span class="n">localizedStringForStatusCode</span><span class="p">(</span><span class="n">httpResponse</span><span class="p">.</span><span class="n">statusCode</span><span class="p">))</span>
+<span class="lineno">18</span>         <span class="p">}</span>
+<span class="lineno">19</span>     <span class="p">}</span>
+<span class="lineno">20</span> <span class="p">}</span></code></pre></div>
 
 <p>Here, <code>success</code> is a function that takes a Weather object as a parameter and returns <code>Void</code> (nothing).</p>
 

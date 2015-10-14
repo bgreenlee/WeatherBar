@@ -236,7 +236,7 @@ Time to get some actual weather data. We're going to use [OpenWeatherMap](http:/
 
 The next thing we need is something to manage communication with the weather API.
 
-File ⟶ New File ⟶ OS X Source ⟶ Swift File ⟶ WeatherAPI.swift, and add the following, making sure you insert your API key.
+File ⟶ New File ⟶ OS X Source ⟶ Swift File ⟶ WeatherAPI.swift, and add the following, **making sure you insert your API key**.
 
 ~~~ swift
 import Foundation
@@ -251,11 +251,22 @@ class WeatherAPI {
         let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         let url = NSURL(string: "\(BASE_URL)?APPID=\(API_KEY)&units=imperial&q=\(escapedQuery!)")
         let task = session.dataTaskWithURL(url!) { data, response, error in
-            if let responseError = error {
-                NSLog("error: %s", responseError)
-            } else {
-                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
-                NSLog(dataString)
+            // first check for a hard error
+            if let error = err {
+                NSLog("weather api error: \(error)")
+            }
+
+            // then check the response code
+            if let httpResponse = response as? NSHTTPURLResponse {
+                switch httpResponse.statusCode {
+                case 200: // all good!
+                    let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
+                    NSLog(dataString)
+                case 401: // unauthorized
+                    NSLog("weather api returned an 'unauthorized' response. Did you set your API key?")
+                default:
+                    NSLog("weather api returned response: %d %@", httpResponse.statusCode, NSHTTPURLResponse.localizedStringForStatusCode(httpResponse.statusCode))
+                }
             }
         }
         task.resume()
@@ -408,18 +419,30 @@ Now, in the _WeatherAPI_ class, add a function to parse the incoming JSON data a
 
 We return an _Optional(Weather)_ because it's possible the JSON may fail to parse.
 
-Now, change the `fetchWeather` function to call `weatherFromJSONData`:
+Now, change the `fetchWeather` function to call `weatherFromJSONData` (lines 11-13):
 
-~~~ swift
+{% highlight swift linenos %}
 let task = session.dataTaskWithURL(url!) { data, response, error in
-    if let responseError = error {
-        NSLog("error: %s", responseError)
-    } else {
-        let weather = self.weatherFromJSONData(data!)
-        NSLog("\(weather)")
+        // first check for a hard error
+    if let error = err {
+        NSLog("weather api error: \(error)")
+    }
+
+    // then check the response code
+    if let httpResponse = response as? NSHTTPURLResponse {
+        switch httpResponse.statusCode {
+        case 200: // all good!
+            if let weather = self.weatherFromJSONData(data!) {
+                NSLog("\(weather)")
+            }
+        case 401: // unauthorized
+            NSLog("weather api returned an 'unauthorized' response. Did you set your API key?")
+        default:
+            NSLog("weather api returned response: %d %@", httpResponse.statusCode, NSHTTPURLResponse.localizedStringForStatusCode(httpResponse.statusCode))
+        }
     }
 }
-~~~
+{% endhighlight %}
 
 If you run it now, you'll see something like this:
 
@@ -479,17 +502,30 @@ init(delegate: WeatherAPIDelegate) {
 }
 ~~~
 
-And now the data fetch task in `fetchWeather` will look like this:
+And now the data fetch task in `fetchWeather` will look like this (line 12 below):
 
-~~~ swift
+{% highlight swift linenos %}
 let task = session.dataTaskWithURL(url!) { data, response, error in
-    if let responseError = error {
-        NSLog("error: %s", responseError)
-    } else if let weather = self.weatherFromJSONData(data!) {
-        self.delegate?.weatherDidUpdate(weather)
+    // first check for a hard error
+    if let error = err {
+        NSLog("weather api error: \(error)")
+    }
+
+    // then check the response code
+    if let httpResponse = response as? NSHTTPURLResponse {
+        switch httpResponse.statusCode {
+        case 200: // all good!
+            if let weather = self.weatherFromJSONData(data!) {
+                self.delegate?.weatherDidUpdate(weather)
+            }
+        case 401: // unauthorized
+            NSLog("weather api returned an 'unauthorized' response. Did you set your API key?")
+        default:
+            NSLog("weather api returned response: %d %@", httpResponse.statusCode, NSHTTPURLResponse.localizedStringForStatusCode(httpResponse.statusCode))
+        }
     }
 }
-~~~
+{% endhighlight %}
 
 Finally, we implement the `WeatherAPIDelegate` protocol in the _StatusMenuController_, with a few changes noted:
 
@@ -514,24 +550,30 @@ class StatusMenuController: NSObject, WeatherAPIDelegate {
 
 With the relatively recent introduction of blocks to Objective-C, and Swift's first-class functions, a simpler way is to use callbacks. (If you implemented the delegate changes above, go ahead and back them out first.)
 
-Change the `fetchWeather` method in _WeatherAPI.swift_ to look like this:
+Change the data-fetching task in the `fetchWeather` method in _WeatherAPI.swift_ to look like this (line 12):
 
-~~~ swift
-func fetchWeather(query:String, success: (Weather) -> Void) {
-    let session = NSURLSession.sharedSession()
-    // url-escape the query string we're passed
-    let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-    let url = NSURL(string: "\(BASE_URL)?APPID=\(API_KEY)&units=imperial&q=\(escapedQuery!)")
-    let task = session.dataTaskWithURL(url!) { data, response, error in
-        if let responseError = error {
-            NSLog("error: %s", responseError)
-        } else if let weather = self.weatherFromJSONData(data!) {
-            success(weather)
+{% highlight swift linenos %}
+let task = session.dataTaskWithURL(url!) { data, response, error in
+    // first check for a hard error
+    if let error = err {
+        NSLog("weather api error: \(error)")
+    }
+
+    // then check the response code
+    if let httpResponse = response as? NSHTTPURLResponse {
+        switch httpResponse.statusCode {
+        case 200: // all good!
+            if let weather = self.weatherFromJSONData(data!) {
+                success(weather)
+            }
+        case 401: // unauthorized
+            NSLog("weather api returned an 'unauthorized' response. Did you set your API key?")
+        default:
+            NSLog("weather api returned response: %d %@", httpResponse.statusCode, NSHTTPURLResponse.localizedStringForStatusCode(httpResponse.statusCode))
         }
     }
-    task.resume()
 }
-~~~
+{% endhighlight %}
 
 Here, `success` is a function that takes a Weather object as a parameter and returns `Void` (nothing).
 
