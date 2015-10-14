@@ -607,12 +607,16 @@ class WeatherView: NSView {
 <p>Now add a method to WeatherView so we can update it with a Weather object:</p>
 
 <pre><code class="language-swift">func update(weather: Weather) {
-    cityTextField.stringValue = weather.city
-    currentConditionsTextField.stringValue = "\(Int(weather.currentTemp))°F and \(weather.conditions)"
+    // do UI updates on the main thread
+    dispatch_async(dispatch_get_main_queue()) {
+        self.cityTextField.stringValue = weather.city
+        self.currentConditionsTextField.stringValue = "\(Int(weather.currentTemp))°F and \(weather.conditions)"
+        self.imageView.image = NSImage(named: weather.icon)
+    }
 }
 </code></pre>
 
-<p>Now bring up StatusMenuController in the Assistant Editor, and ctrl-drag from the Weather View object over to the top of the StatusMenuController class to create a <code>weatherView</code> outlet. While we’re there, we’re going to add a <code>weatherMenuItem</code> class var:</p>
+<p>(The reason we use <code>dispatch_async</code> here is that any updates to the UI should be donw on the main thread, and <code>update</code> is getting called from a networking thread.) Now bring up StatusMenuController in the Assistant Editor, and ctrl-drag from the Weather View object over to the top of the StatusMenuController class to create a <code>weatherView</code> outlet. While we’re there, we’re going to add a <code>weatherMenuItem</code> class var:</p>
 
 <pre><code class="language-swift">class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
