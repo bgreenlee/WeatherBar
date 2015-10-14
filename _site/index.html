@@ -21,8 +21,8 @@
     <header>
       <div class="inner">
         <h1>WeatherBar</h1>
-        <h2>Demo weather app for Etsy School class on writing a Mac app in Swift</h2>
-        <a href="https://github.etsycorp.com/bgreenlee/WeatherBar" class="button"><small>View project on</small>GitHub</a>
+        <h2>Write a Mac App in Swift!</h2>
+        <a href="https://github.com/bgreenlee/WeatherBar" class="button"><small>View project on</small>GitHub</a>
       </div>
     </header>
 
@@ -30,13 +30,11 @@
       <div class="inner clearfix">
         <section id="main-content">
 
-<h1 id="write-a-mac-menu-bar-app-in-swift">Write a Mac Menu Bar App in Swift</h1>
-
-<p>This tutorial will walk you through writing a Mac Menu Bar (aka Status Bar) app, using Swift. We’ll build a simple weather app using data from <a href="http://openweathermap.org/">OpenWeatherMap</a>. In the end, it will look like this:</p>
+<p>This tutorial will walk you through writing a Mac Menu Bar (aka Status Bar) app, using <a href="https://developer.apple.com/swift/">Swift</a>. We’ll build a simple weather app using data from <a href="http://openweathermap.org/">OpenWeatherMap</a>. In the end, it will look like this:</p>
 
 <p><img src="assets/weatherbar.png" alt="" /></p>
 
-<p>The complete code can be found at https://github.etsycorp.com/bgreenlee/WeatherBar, with step of the tutorial in its own branch.</p>
+<p>The complete code can be found at <a href="https://github.com/bgreenlee/WeatherBar">https://github.com/bgreenlee/WeatherBar</a>.</p>
 
 <h2 id="whats-a-menu-bar-app-and-why-would-i-want-to-write-one">What’s a Menu Bar App and Why Would I Want to Write One?</h2>
 
@@ -51,9 +49,9 @@
 
 <h2 id="prerequisites">Prerequisites</h2>
 
-<p>You should have the latest stable version of <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">Xcode</a>. At the time of this writing, that is 6.2. As Swift is a language still under heavy development, it’s not unlikely that the code written here may fail to compile on earlier or later versions. I’ll try to keep this up-to-date, but if you find any errors, please <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#098;&#114;&#097;&#100;&#064;&#102;&#111;&#111;&#116;&#108;&#101;&#046;&#111;&#114;&#103;">let me know</a>.</p>
+<p>You should have the latest stable version of <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">Xcode</a>. At the time of this writing, that is 7.0. As Swift is a language still under heavy development, it’s not unlikely that the code written here may fail to compile on earlier or later versions. I’ll try to keep this up-to-date, but if you find any errors, please <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#098;&#114;&#097;&#100;&#064;&#102;&#111;&#111;&#116;&#108;&#101;&#046;&#111;&#114;&#103;">let me know</a>.</p>
 
-<h2 id="lets-get-something-running-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-00">Let’s Get Something Running (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-00">code</a>)</h2>
+<h2 id="lets-get-something-running">Let’s Get Something Running</h2>
 
 <p>Open Xcode.</p>
 
@@ -61,7 +59,7 @@
 
 <p>Choose <em>Application ⟶ Cocoa Application</em> under OS X and click Next</p>
 
-<p>Product Name: <em>WeatherBar</em>, Language <em>Swift</em>, uncheck <em>Use Storyboards</em>. Organization name and identifier are not important at this stage. Make something up if you like.</p>
+<p>Product Name: <em>WeatherBar</em>, Language <em>Swift</em>, uncheck <em>Use Storyboards</em>. Organization name and identifier are not important at this stage. Make something up if you like. (But you probably should use something other than Etsy.)</p>
 
 <p><img src="assets/new-project.png" alt="" /></p>
 
@@ -69,32 +67,36 @@
 
 <h3 id="lets-code">Let’s Code!</h3>
 
-<p>Click on <em>MainMenu.xib</em></p>
+<p>Click on <em>MainMenu.xib</em> in the sidebar.</p>
 
 <p>Under Objects, delete the default window and menu.</p>
 
 <p><img src="assets/window-menu-delete.png" alt="" /></p>
 
-<p>Go to the library, type “menu” and drag out an <em>NSMenu</em>.</p>
+<p>Go to the Object Library (right-hand pane, on the bottom; if it isn’t showing, go to the menu item View ⟶ Utilities ⟶ Show Object Library, or hit ⌃⌥⌘3). Type “menu” and drag a <em>Menu</em> object over to your Objects list, under Font Manager.</p>
+
+<p><img src="assets/add-menu.gif" alt="Dragging a Menu object" /></p>
 
 <p>Delete all but one menu item.</p>
 
 <p>Rename the last menu item to <em>Quit</em>.</p>
 
-<p>Open the Assistant Editor (⌥⌘↩), this lets us have the Interface Builder and our code side-by-side. Make sure <em>AppDelegate.swift</em> is in the right-hand pane.</p>
+<p>Open the Assistant Editor (⌥⌘↩); this lets us have the Interface Builder and our code side-by-side (if you’re a bit cramped for space, you can toggle the Utilities pane on the far right by hitting ⌥⌘0). Make sure <em>AppDelegate.swift</em> is in the right-hand pane.</p>
 
-<p>Ctrl-drag from Menu to code and create a <code>statusMenu</code>outlet.</p>
+<p>Hold down the control key and drag from your Menu object over to the code, just above or below where it says <code>@IBOutlet weak var window: NSWindow!</code>. “Insert Outlet” will appear. Let go and a dialog will pop up asking you to name the outlet. Call it <code>statusMenu</code>.</p>
 
-<p><img src="assets/create-outlet.png" alt="" /></p>
+<p><img src="assets/create-outlet.png" alt="Create statusMenu outlet" /></p>
 
-<p>Ctrl-drag from the <em>Quit</em> menu item to the code and create a <code>quitClicked</code> <strong>action</strong> (set type to <em>NSMenuItem</em>)</p>
+<p>Do the same for the <em>Quit</em> menu item, control-dragging to the code, but this time create an <strong>action</strong> named <code>quitClicked</code> <strong>action</strong>, with the type set to <em>NSMenuItem</em>.</p>
 
-<p>In <em>AppDelegate.swift</em>, delete the <code>window</code> var, and under <code>statusMenu</code>, add:</p>
+<p><img src="assets/create-quit-action.png" alt="Create Quit action" /></p>
 
-<pre><code class="language-swift">let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1) // NSVariableStatusItemLength
+<p>You can delete the <code>@IBOutlet weak var window: NSWindow!</code> line. We don’t need it.</p>
+
+<p>In <em>AppDelegate.swift</em>, under <code>statusMenu</code>, add:</p>
+
+<pre><code class="language-swift">let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
 </code></pre>
-
-<p>(The -1 represents the constant <code>NSVariableStatusItemLength</code> (-2 is <code>NSSquareStatusItemLength</code>), which for some reason hasn’t been ported over to Swift yet.)</p>
 
 <p>In <code>applicationDidFinishLaunching</code>, add:</p>
 
@@ -107,9 +109,36 @@ statusItem.menu = statusMenu
 <pre><code class="language-swift">NSApplication.sharedApplication().terminate(self)
 </code></pre>
 
-<p>Run it! You have a working menu bar app.</p>
+<p>Your code should now look like:</p>
 
-<h2 id="make-it-look-like-a-real-menu-bar-app-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-01-icon">Make it Look Like a Real Menu Bar App (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-01-icon">code</a>)</h2>
+<pre><code class="language-swift">import Cocoa
+
+@NSApplicationMain
+class AppDelegate: NSObject, NSApplicationDelegate {
+
+    @IBOutlet weak var statusMenu: NSMenu!
+
+    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
+
+    @IBAction func quitClicked(sender: NSMenuItem) {
+        NSApplication.sharedApplication().terminate(self)
+    }
+
+    func applicationDidFinishLaunching(aNotification: NSNotification) {
+        statusItem.title = "WeatherBar"
+        statusItem.menu = statusMenu
+    }
+
+    func applicationWillTerminate(aNotification: NSNotification) {
+        // Insert code here to tear down your application
+    }
+
+}
+</code></pre>
+
+<p>Run it! Hit ⌘R or Product ⟶ Run. You now have a working menu bar app.</p>
+
+<h2 id="make-it-look-like-a-real-menu-bar-app">Make it Look Like a Real Menu Bar App</h2>
 
 <p>You might have noticed an icon shows up in your Dock when you ran your app. You also get the default application menus on the left side of the status bar. Menu bar apps don’t need either of those, so let’s get rid of them.</p>
 
@@ -127,36 +156,50 @@ statusItem.menu = statusMenu
 
 <p>For the icon that goes in the status bar, you need two versions, one 18x18 <img src="assets/statusIcon-sun.png" alt="" />, and one 2x version at 36x36 <img src="assets/statusIcon-sun@2x.png" alt="" />.</p>
 
-<p>Click <strong>Images.xcassets</strong>, then the plus button on the bottom of the next panel to the right, and select <strong>New Image Set</strong>. Name the image set “statusIcon” and drag the icons into the 1x and 2x boxes.</p>
+<p>Click <em>Assets.xcassets</em> in the left sidebar, then the plus button on the bottom of the next panel to the right, and select <em>New Image Set</em>. Name the image set “statusIcon” and drag the icons into the 1x and 2x boxes (you can drag them straight from your browser into Xcode).</p>
+
+<p><img src="assets/add-status-icon.png" alt="" /></p>
 
 <p>In <code>applicationDidFinishLaunching</code>, add:</p>
 
 <pre><code class="language-swift">let icon = NSImage(named: "statusIcon")
-icon?.setTemplate(true) // best for dark mode
+icon?.template = true // best for dark mode
 statusItem.image = icon
 statusItem.menu = statusMenu
 </code></pre>
 
 <p>Delete the <code>statusItem.title</code> line.</p>
 
-<p>Try running it again.</p>
+<p>Try running it again. We have an icon!</p>
 
-<h2 id="reorganize-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-02-reorg">Reorganize (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-02-reorg">code</a>)</h2>
+<p>You’re probably wondering why the icon that shows up is just a black version of our nice yellow sun. Try commenting out the <code>icon?.template = true</code> line and running it again. Boom! Cool yellow sun.</p>
+
+<p>You’ll notice that most, if not all, the icons in your status bar are black. The reason Apple prefers this is to make them work better in dark mode. Go to your System Preferences, General, and you’ll see a checkbox at the top for “Use dark menu bar and Dock”. Try checking it.</p>
+
+<p>Turns out our sun icon actually looks better in dark mode than in normal mode. It’s really your call whether you want the black &amp; white version or the color version. Just know that Apple prefers you use the boring version.</p>
+
+<h2 id="reorganize">Reorganize</h2>
 
 <p>Before we add more code, we should find a better place to put it. The AppDelegate is really meant to be used only for handling application lifecycle events. We <em>could</em> dump all our code in there, but at some point you’re going to hate yourself.</p>
 
-<p>Create a controller for the status menu: File ⟶ New File ⟶ Source ⟶ Cocoa Class ⟶ “StatusMenuController”, with a subclass of NSObject. And let’s move over our code from the AppDelegate. It should contain:</p>
+<p>Create a controller for the status menu: File ⟶ New File ⟶ OS X Source ⟶ Cocoa Class ⟶ Next</p>
 
-<pre><code class="language-swift">import Cocoa
+<p><img src="assets/new-cocoa-class.png" alt="" /></p>
+
+<p>Name the class “StatusMenuController”, with a subclass of <em>NSObject</em>. Hit next and save. Now let’s move over the following code from the AppDelegate. Rename the <code>applicationDidFinishLaunching</code> method to <code>override func awakeFromNib()</code>. The StatusMenuController should look like:</p>
+
+<pre><code class="language-swift">// StatusMenuController.swift
+
+import Cocoa
 
 class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
 
-    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1) // NSVariableStatusItemLength
+    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
 
     override func awakeFromNib() {
         let icon = NSImage(named: "statusIcon")
-        icon?.setTemplate(true) // best for dark mode
+        icon?.template = true // best for dark mode
         statusItem.image = icon
         statusItem.menu = statusMenu
     }
@@ -167,51 +210,90 @@ class StatusMenuController: NSObject {
 }
 </code></pre>
 
-<p>Remove the above code from AppDelegate.</p>
+<p>Remove the above code from AppDelegate. It should now look the same as when we first started, minus the <code>window</code> var.</p>
 
-<p>We’ll need to reconnect everything again. We’ll also need to make sure that our StatusMenuController gets loaded when MainMenu.xib gets loaded. To do that, we need to add it as an Object in the XIB.</p>
+<pre><code class="language-swift">// AppDelegate.swift
 
-<p>Go to <strong>MainMenu.xib</strong>. In the Library, type “object”, and then drag an Object over to just above your Menu.</p>
+import Cocoa
+
+@NSApplicationMain
+class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(aNotification: NSNotification) {
+        // Insert code here to initialize your application
+    }
+    func applicationWillTerminate(aNotification: NSNotification) {
+        // Insert code here to tear down your application
+    }
+}
+</code></pre>
+
+<p>Unfortunately, when you move code that was connected to UI elements (such as <code>statusItem</code> and <code>quitClicked</code>), Xcode loses the connection, so we’ll need to reconnect them.</p>
+
+<p>First, though, we need to make sure that our StatusMenuController gets loaded when MainMenu.xib gets loaded. To do that, we need to add it as an Object in the XIB.</p>
+
+<p>Click on <em>MainMenu.xib</em>. Open the Object Library again, and type “object”, and then drag an Object over to just above your Menu.</p>
+
+<p><img src="assets/drag-object.png" alt="Drag new Object" /></p>
 
 <p>Name the Object “StatusMenuController”, select the Identity Inspector (⌥⌘3), and enter “StatusMenuController” in the Class field.</p>
 
-<p>Right-click on the StatusMenuController object, and under Outlets, drag the circle next to <strong>statusMenu</strong> over to your Menu object.</p>
+<p><img src="assets/set-statusmenucontroller-class.png" alt="Set StatusMenuController class" /></p>
 
-<p>Do that again for the <strong>quitClicked</strong> action, going to your Quit menu item.</p>
+<p>Right-click on the <em>StatusMenuController</em> object, and under Outlets, drag the circle next to <em>statusMenu</em> over to your Menu object.</p>
 
-<p>Finally, right-click on the App Delegate object and click the X next to the statusMenu outlet to clear that association.</p>
+<p><img src="assets/reconnect-status-menu.png" alt="Reconnect status menu" /></p>
 
-<p>Now, when the application is launched and the <strong>StatusMenu.xib</strong> is instantiated, our StatusMenuController will receive <code>awakeFromNib</code>, and we can do what we need to initialize the status menu.</p>
+<p>Do that again for the <em>quitClicked</em> action, going to your Quit menu item.</p>
 
-<h2 id="step-3-calling-the-api-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-03-api">Step 3: Calling the API (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-03-api">code</a>)</h2>
+<p>Finally, right-click on the <em>Delegate</em> object and click the X next to the statusMenu outlet to clear that association.</p>
+
+<p><img src="assets/clear-delegate-status-menu.png" alt="Clear delegate status menu" /></p>
+
+<p>Now, when the application is launched and the <em>MainMenu.xib</em> is instantiated, our StatusMenuController will receive <code>awakeFromNib</code>, and we can do what we need to initialize the status menu.</p>
+
+<p>Run it again to make sure it still works.</p>
+
+<h2 id="step-3-calling-the-api">Step 3: Calling the API</h2>
+
+<p>Time to get some actual weather data. We’re going to use <a href="http://openweathermap.org/">OpenWeatherMap</a>. You’ll need to <a href="http://home.openweathermap.org/users/sign_up">create an account</a> to get your free API key.</p>
 
 <p>The next thing we need is something to manage communication with the weather API.</p>
 
-<p>File ⟶ New File ⟶ Source ⟶ Swift File ⟶ WeatherAPI.swift</p>
+<p>File ⟶ New File ⟶ OS X Source ⟶ Swift File ⟶ WeatherAPI.swift, and add the following, making sure you insert your API key.</p>
 
-<pre><code class="language-swift">class WeatherAPI {
-    let BASE_URL = "http://api.openweathermap.org/data/2.5/weather?units=imperial&amp;q="
+<pre><code class="language-swift">import Foundation
+
+class WeatherAPI {
+    let API_KEY = "your-api-key-here"
+    let BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
     func fetchWeather(query: String) {
         let session = NSURLSession.sharedSession()
+        // url-escape the query string we're passed
         let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-        let url = NSURL(string: BASE_URL + escapedQuery!)
+        let url = NSURL(string: "\(BASE_URL)?APPID=\(API_KEY)&amp;units=imperial&amp;q=\(escapedQuery!)")
         let task = session.dataTaskWithURL(url!) { data, response, error in
-            let dataString = NSString(data: data, encoding: NSUTF8StringEncoding) as String
-            NSLog(dataString)
+            if let responseError = error {
+                NSLog("error: %s", responseError)
+            } else {
+                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
+                NSLog(dataString)
+            }
         }
         task.resume()
     }
 }
 </code></pre>
 
-<p>Now we need a way to call this. We could just stick a call in <strong>AppDelegate</strong> or <strong>StatusMenuController#awakeFromNib</strong>, but let’s be a little less lazy and add a menu item to call it.</p>
+<p>Now we need a way to call this. We could just stick a call in <em>AppDelegate</em> or <code>StatusMenuController#awakeFromNib</code>, but let’s be a little less lazy and add a menu item to call it.</p>
 
-<p>In MainMenu.xib, type “Menu Item” into the library search field (bottom right), and drag a Menu Item over to above Quit in your menu. While we’re at it, drag a Separator Menu Item between those two.</p>
+<p>In <em>MainMenu.xib</em>, type “Menu Item” into the Object Library search field (bottom right), and drag a Menu Item over to above Quit in your menu. While we’re at it, drag a Separator Menu Item between those two. Rename the new menu item “Update”.</p>
 
-<p>Rename the new menu item “Update”. Open the Assistant Editor with <strong>StatusMenuController.swift</strong> and ctrl-drag from Update over to your code above <code>quitClicked</code> and create a new action, <code>updateClicked</code>, with the type again as <strong>NSMenuItem</strong>.</p>
+<p><img src="assets/update-menu-item.png" alt="Add Update menu item" /></p>
 
-<p>We need to instantiate <strong>WeatherAPI</strong>, so in <strong>StatusMenuController</strong> at the top, under <code>let statusItem</code> add:</p>
+<p>Open the Assistant Editor with <em>StatusMenuController.swift</em> and ctrl-drag from Update over to your code above <code>quitClicked</code> and create a new action, <code>updateClicked</code>, with the type again as <em>NSMenuItem</em>.</p>
+
+<p>We need to instantiate <em>WeatherAPI</em>, so in <em>StatusMenuController</em> at the top, under <code>let statusItem</code> add:</p>
 
 <pre><code class="language-swift">let weatherAPI = WeatherAPI()
 </code></pre>
@@ -225,15 +307,18 @@ class StatusMenuController: NSObject {
 
 <p>Now, you probably want it to fetch the weather as soon as the app launches. Let’s reorganize <code>StatusMenuController</code> a bit, adding an <code>updateWeather</code> method. Here’s what it looks like now:</p>
 
-<pre><code class="language-swift">class StatusMenuController: NSObject {
+<pre><code class="language-swift">import Cocoa
+
+class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
 
-    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1) // NSVariableStatusItemLength
+    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
     let weatherAPI = WeatherAPI()
 
     override func awakeFromNib() {
+        statusItem.menu = statusMenu
         let icon = NSImage(named: "statusIcon")
-        icon?.setTemplate(true) // best for dark mode
+        icon?.template = true // best for dark mode
         statusItem.image = icon
         statusItem.menu = statusMenu
 
@@ -254,54 +339,54 @@ class StatusMenuController: NSObject {
 }
 </code></pre>
 
-<h2 id="parsing-json-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-04-json-parsing">Parsing JSON (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-04-json-parsing">code</a>)</h2>
+<h2 id="parsing-json">Parsing JSON</h2>
 
 <p>Parsing JSON is a little awkward in Swift, and people have written libraries–like <a href="https://github.com/SwiftyJSON/SwiftyJSON">SwiftyJSON</a>–to make this easier, but our needs are simple and I don’t want to complicate things with installing external libraries (although if you do, the two main package managers for Xcode are <a href="https://github.com/Carthage/Carthage">Carthage</a> and <a href="http://cocoapods.org/">CocoaPODS</a>).</p>
 
-<p>Here’s the JSON returned by OpenWeatherMap:</p>
+<p>Here’s the [prettified] JSON returned by OpenWeatherMap:</p>
 
 <pre><code class="language-json">{
     "coord": {
         "lon": -122.33,
-        "lat": 47.6
-    },
-    "sys": {
-        "type": 1,
-        "id": 2923,
-        "message": 0.0242,
-        "country": "United States of America",
-        "sunrise": 1426774374,
-        "sunset": 1426818056
+        "lat": 47.61
     },
     "weather": [{
         "id": 800,
         "main": "Clear",
         "description": "sky is clear",
-        "icon": "01d"
+        "icon": "01n"
     }],
     "base": "cmc stations",
     "main": {
-        "temp": 52.41,
-        "pressure": 1020,
-        "humidity": 76,
-        "temp_min": 48.2,
-        "temp_max": 57
+        "temp": 57.45,
+        "pressure": 1018,
+        "humidity": 59,
+        "temp_min": 53.6,
+        "temp_max": 62.6
     },
     "wind": {
-        "speed": 7.78,
-        "deg": 180
+        "speed": 2.61,
+        "deg": 19.5018
     },
     "clouds": {
         "all": 1
     },
-    "dt": 1426790612,
+    "dt": 1444623405,
+    "sys": {
+        "type": 1,
+        "id": 2949,
+        "message": 0.0065,
+        "country": "US",
+        "sunrise": 1444659833,
+        "sunset": 1444699609
+    },
     "id": 5809844,
     "name": "Seattle",
     "cod": 200
 }
 </code></pre>
 
-<p>There’s a lot of information we could use here, but for now let’s keep it simple and just take the city name, current temperature, and the weather description. Let’s first create a place to put the weather data. In <strong>WeatherAPI.swift</strong>, add a struct at the top of the file:</p>
+<p>There’s a lot of information we could use here, but for now let’s keep it simple and just take the city name, current temperature, and the weather description. Let’s first create a place to put the weather data. In <em>WeatherAPI.swift</em>, add a struct at the top of the file:</p>
 
 <pre><code class="language-swift">struct Weather {
     var city: String
@@ -310,47 +395,55 @@ class StatusMenuController: NSObject {
 }
 </code></pre>
 
-<p>Now add a function to parse the incoming JSON data and return a Weather object:</p>
+<p>Now, in the <em>WeatherAPI</em> class, add a function to parse the incoming JSON data and return a Weather object:</p>
 
-<pre><code class="language-swift">func weatherFromJSONData(data: NSData) -&gt; Weather? {
-    var err: NSError?
-    typealias JSONDict = [String:AnyObject]
+<pre><code class="language-swift">    func weatherFromJSONData(data: NSData) -&gt; Weather? {
+        typealias JSONDict = [String:AnyObject]
+        let json : JSONDict
 
-    if let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &amp;err) as? JSONDict {
-        var mainDict = json["main"] as JSONDict
-        var weatherList = json["weather"] as [JSONDict]
+        do {
+            json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! JSONDict
+        } catch {
+            NSLog("JSON parsing failed: \(error)")
+            return nil
+        }
+
+        var mainDict = json["main"] as! JSONDict
+        var weatherList = json["weather"] as! [JSONDict]
         var weatherDict = weatherList[0]
 
-        var weather = Weather(
-            city: json["name"] as String,
-            currentTemp: mainDict["temp"] as Float,
-            conditions: weatherDict["main"] as String
+        let weather = Weather(
+            city: json["name"] as! String,
+            currentTemp: mainDict["temp"] as! Float,
+            conditions: weatherDict["main"] as! String
         )
 
         return weather
     }
-    return nil
-}
 </code></pre>
 
-<p>We return an <strong>Optional(Weather)</strong> because it’s possible the JSON may fail to parse.</p>
+<p>We return an <em>Optional(Weather)</em> because it’s possible the JSON may fail to parse.</p>
 
 <p>Now, change the <code>fetchWeather</code> function to call <code>weatherFromJSONData</code>:</p>
 
 <pre><code class="language-swift">let task = session.dataTaskWithURL(url!) { data, response, error in
-    let weather = self.weatherFromJSONData(data)
-    NSLog("\(weather)")
+    if let responseError = error {
+        NSLog("error: %s", responseError)
+    } else {
+        let weather = self.weatherFromJSONData(data!)
+        NSLog("\(weather)")
+    }
 }
 </code></pre>
 
-<p>If you run it now, you’ll see that the logging isn’t terribly helpful:</p>
+<p>If you run it now, you’ll see something like this:</p>
 
-<pre><code>2015-03-19 14:58:00.758 WeatherBar[49688:1998824] Optional(WeatherBar.Weather)
+<pre><code>2015-03-19 14:58:00.758 WeatherBar[49688:1998824] Optional(WeatherBar.Weather(city: "Seattle", currentTemp: 51.6, conditions: "Clouds"))
 </code></pre>
 
-<p>To make our Weather struct printable, we need to implement the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/SwiftStandardLibraryReference/Printable.html">Printable</a> or <strong>DebugPrintable</strong> protocols, which just entails adding a <code>description</code> or <code>debugDescription</code> var. Let’s do the former:</p>
+<p>We can make that output a little neater by implementing the <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Reference/Swift_CustomStringConvertible_Protocol/index.html">CustomStringConvertible</a> protocol, which just entails adding a <code>description</code>. Change your <em>Weather</em> struct to:</p>
 
-<pre><code class="language-swift">struct Weather: Printable {
+<pre><code class="language-swift">struct Weather: CustomStringConvertible {
     var city: String
     var currentTemp: Float
     var conditions: String
@@ -363,30 +456,32 @@ class StatusMenuController: NSObject {
 
 <p>If you run it again now you’ll see:</p>
 
-<pre><code>2015-03-19 15:11:49.130 WeatherBar[50731:2009152] Optional(Seattle: 58.87F and Clouds)
+<pre><code>2015-10-12 06:04:04.553 WeatherBar[53565:17504783] Optional(Seattle: 51.6F and Clouds)
 </code></pre>
 
-<h2 id="getting-the-weather-into-the-controller-delegate-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-05a-delegate-or-callback-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-05b-callback">Getting the Weather into the Controller (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-05a-delegate">delegate code</a> or <a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-05b-callback">callback code</a>)</h2>
+<h2 id="getting-the-weather-into-the-controller">Getting the Weather into the Controller</h2>
 
 <p>Next, let’s actually display the weather in our app, as opposed to in the debug console.</p>
 
-<p>First we have the problem of how we get the weather data back into our controller. The weather API call is asynchronous, so we can’t just call weatherAPI.fetchWeather() and expect a Weather object in return.</p>
+<p>First we have the problem of how we get the weather data back into our controller, so we can in turn insert it into the menu. The weather API call is asynchronous, so we can’t just call <code>weatherAPI.fetchWeather()</code> and expect a Weather object in return.</p>
 
-<p>There are two common ways to handle this. The most common pattern in MacOS and iOS programming (at least up until recently), is to use a delegate:</p>
+<p>There are two common ways to handle asynchronous responses: delegates and callbacks.  Up until recently, delegates were the most common pattern in MacOS and iOS programming. I’ll describe how that would work in the next section. <strong>Feel free to just read along, rather than implement, as our final code will use a callback.</strong></p>
 
-<p>Add the following above <code>class WeatherAPI</code>:</p>
+<h3 id="delegate-implementation">Delegate Implementation</h3>
+
+<p>Add the following above <code>class WeatherAPI</code> in <strong>WeatherAPI.swift</strong>:</p>
 
 <pre><code class="language-swift">protocol WeatherAPIDelegate {
     func weatherDidUpdate(weather: Weather)
 }
 </code></pre>
 
-<p>Add the following class variable to WeatherAPI:</p>
+<p>Add the following class variable to the WeatherAPI class, below <code>let BASE_URL = ...</code>:</p>
 
 <pre><code class="language-swift">var delegate: WeatherAPIDelegate?
 </code></pre>
 
-<p>Add an initializer fuction:</p>
+<p>Add an initializer fuction below that:</p>
 
 <pre><code class="language-swift">init(delegate: WeatherAPIDelegate) {
     self.delegate = delegate
@@ -396,13 +491,15 @@ class StatusMenuController: NSObject {
 <p>And now the data fetch task in <code>fetchWeather</code> will look like this:</p>
 
 <pre><code class="language-swift">let task = session.dataTaskWithURL(url!) { data, response, error in
-    if let weather = self.weatherFromJSONData(data) {
+    if let responseError = error {
+        NSLog("error: %s", responseError)
+    } else if let weather = self.weatherFromJSONData(data!) {
         self.delegate?.weatherDidUpdate(weather)
     }
 }
 </code></pre>
 
-<p>Finally, we implement the <code>WeatherAPIDelegate</code> protocol in the controller, with a few changes noted:</p>
+<p>Finally, we implement the <code>WeatherAPIDelegate</code> protocol in the <em>StatusMenuController</em>, with a few changes noted:</p>
 
 <pre><code class="language-swift">class StatusMenuController: NSObject, WeatherAPIDelegate {
 ...
@@ -420,14 +517,21 @@ class StatusMenuController: NSObject {
   ...
 </code></pre>
 
-<p>However, with the relatively recent introduction of blocks to Objective-C, and Swift’s first-class functions, a simpler way is to use callbacks:</p>
+<h3 id="callback-implementation">Callback Implementation</h3>
+
+<p>With the relatively recent introduction of blocks to Objective-C, and Swift’s first-class functions, a simpler way is to use callbacks. (If you implemented the delegate changes above, go ahead and back them out first.)</p>
+
+<p>Change the <code>fetchWeather</code> method in <em>WeatherAPI.swift</em> to look like this:</p>
 
 <pre><code class="language-swift">func fetchWeather(query:String, success: (Weather) -&gt; Void) {
     let session = NSURLSession.sharedSession()
+    // url-escape the query string we're passed
     let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-    let url = NSURL(string: BASE_URL + escapedQuery!)
+    let url = NSURL(string: "\(BASE_URL)?APPID=\(API_KEY)&amp;units=imperial&amp;q=\(escapedQuery!)")
     let task = session.dataTaskWithURL(url!) { data, response, error in
-        if let weather = self.weatherFromJSONData(data) {
+        if let responseError = error {
+            NSLog("error: %s", responseError)
+        } else if let weather = self.weatherFromJSONData(data!) {
             success(weather)
         }
     }
@@ -446,13 +550,15 @@ class StatusMenuController: NSObject {
 }
 </code></pre>
 
-<h2 id="displaying-the-weather-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-06-displaying">Displaying the Weather (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-06-displaying">code</a>)</h2>
+<p>Run it to verify that it still works.</p>
+
+<h2 id="displaying-the-weather">Displaying the Weather</h2>
 
 <p>Finally, we’ll update our menu to display the weather.</p>
 
-<p>In MainMenu.xib, add a new MenuItem between Update and Quit (and another separator) and rename it “Weather”.</p>
+<p>In <em>MainMenu.xib</em>, add a new MenuItem between Update and Quit (and another separator) and rename it “Weather”.</p>
 
-<p><img src="assets/weather-menu-item.png" alt="" /></p>
+<p><img src="assets/add-weather-menu-item.png" alt="Add Weather Menu Item" /></p>
 
 <p>In your controller, in <code>updateWeather</code>, replace the <code>NSLog</code> with:</p>
 
@@ -465,23 +571,29 @@ class StatusMenuController: NSObject {
 
 <p>The weather is greyed out because we have no action associated with selecting it. We could have it open a web page to a detailed forecast, but instead next we’ll make a nicer display.</p>
 
-<h2 id="creating-a-weather-view-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-07-weather-view">Creating a Weather View (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-07-weather-view">code</a>)</h2>
+<h2 id="creating-a-weather-view">Creating a Weather View</h2>
 
 <p>Open MainMenu.xib.</p>
 
 <p>Drag a Custom View onto the page.</p>
 
-<p>Drag a Image View into the upper left corner of the view, and in the Image View’s Size Inspector, set the width and height to 50.</p>
+<p>Drag a Image View into the upper left corner of the view, and in the Image View’s Size Inspector (⌥⌘5), set the width and height to 50.</p>
+
+<p><img src="assets/image-view-size.png" alt="Set Image View Size" /></p>
 
 <p>Add Labels for city and current temperature/conditions (we’ll use one label for both temperature and conditions).</p>
 
-<p>Adjust the view size down to about 265 x 90 (you can set that in the Image View’s Size Inspector). It should look roughly like this:</p>
+<p>Adjust the view size down to about 265 x 90 (you can set that in the Custom View’s Size Inspector). It should look roughly like this:</p>
 
-<p><img src="assets/weather-view.png" alt="" /></p>
+<p><img src="assets/weather-view.png" alt="Weather View" /></p>
 
-<p>New File ⟶ Source ⟶ Cocoa Class, name it WeatherView and make it a subclass of NSView, and save. The file will contain a stub <code>drawRect</code> method which you can delete.</p>
+<p>New File ⟶ OS X Source ⟶ Cocoa Class, name it WeatherView and make it a subclass of NSView, and save. The file will contain a stub <code>drawRect</code> method which you can delete.</p>
 
-<p>Back in MainMenu.xib, click on the View, and in the Identity Inspector, set the class to “WeatherView”. Now use the Assistant editor to bring up the xib and class file side-by-side, and then ctrl-drag from the xib to create outlets for each of the elements in the view. WeatherView.swift should look like:</p>
+<p>Back in MainMenu.xib, click on the Custom View, and in the Identity Inspector (⌥⌘3), set the class to “WeatherView”.</p>
+
+<p><img src="assets/weather-view-class.png" alt="Set WeatherView Class" /></p>
+
+<p>Now use the Assistant Editor (⌥⌘↩) to bring up the xib and class file side-by-side, and then ctrl-drag from the xib to create outlets for each of the elements in the view. WeatherView.swift should look like:</p>
 
 <pre><code class="language-swift">import Cocoa
 
@@ -494,13 +606,13 @@ class WeatherView: NSView {
 
 <p>Now add a method to WeatherView so we can update it with a Weather object:</p>
 
-<pre><code class="language-swift">    func update(weather: Weather) {
-        cityTextField.stringValue = weather.city
-        currentConditionsTextField.stringValue = "\(Int(weather.currentTemp))°F and \(weather.conditions)"
-    }
+<pre><code class="language-swift">func update(weather: Weather) {
+    cityTextField.stringValue = weather.city
+    currentConditionsTextField.stringValue = "\(Int(weather.currentTemp))°F and \(weather.conditions)"
+}
 </code></pre>
 
-<p>Now bring up StatusMenuController in the Assistant editor, and ctrl-drag from the Weather View object over to the top of the StatusMenuController class to create a <code>weatherView</code> outlet. While we’re there, we’re going to add a <code>weatherMenuItem</code> class var:</p>
+<p>Now bring up StatusMenuController in the Assistant Editor, and ctrl-drag from the Weather View object over to the top of the StatusMenuController class to create a <code>weatherView</code> outlet. While we’re there, we’re going to add a <code>weatherMenuItem</code> class var:</p>
 
 <pre><code class="language-swift">class StatusMenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
@@ -526,24 +638,26 @@ weatherMenuItem.view = weatherView
 
 <p>Run it!</p>
 
-<h2 id="adding-the-weather-image-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-08-weather-image">Adding the Weather Image (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-08-weather-image">code</a>)</h2>
+<h2 id="adding-the-weather-image">Adding the Weather Image</h2>
 
 <p>So, we’re obviously missing something in our weather view. Let’s update it with the appropriate weather image.</p>
 
-<p>The images for the various weather conditions can be found at http://openweathermap.org/weather-conditions, but I’ve put them in a <a href="assets/weather-icons.zip">zip file</a> for you. You can just unzip that and drag the whole folder into <strong>Images.xcassets</strong>.</p>
+<p>The images for the various weather conditions can be found at http://openweathermap.org/weather-conditions, but I’ve put them in a <a href="assets/weather-icons.zip">zip file</a> for you. You can just unzip that and drag the whole folder into <em>Assets.xcassets</em>.</p>
 
-<p>We need to update <strong>WeatherAPI</strong> to capture the icon code. In the Weather struct, add:</p>
+<p><img src="assets/weather-images-assets.png" alt="Drag Weather Images to Assets" /></p>
+
+<p>We need to update <em>WeatherAPI</em> to capture the icon code. In the <em>Weather</em> struct in <em>WeatherAPI.swift</em>, add:</p>
 
 <pre><code class="language-swift">var icon: String
 </code></pre>
 
 <p>and in <code>weatherFromJSONData</code>, add that to the Weather initialization:</p>
 
-<pre><code class="language-swift">var weather = Weather(
-    city: json["name"] as String,
-    currentTemp: mainDict["temp"] as Float,
-    conditions: weatherDict["main"] as String,
-    icon: weatherDict["icon"] as String
+<pre><code class="language-swift">let weather = Weather(
+    city: json["name"] as! String,
+    currentTemp: mainDict["temp"] as! Float,
+    conditions: weatherDict["main"] as! String,
+    icon: weatherDict["icon"] as! String
 )
 </code></pre>
 
@@ -552,25 +666,27 @@ weatherMenuItem.view = weatherView
 <pre><code class="language-swift">imageView.image = NSImage(named: weather.icon)
 </code></pre>
 
-<p>That’s it! Run it.</p>
+<p>That’s it! Run it. Pretty!</p>
 
-<h2 id="preferences-codehttpsgithubetsycorpcombgreenleeweatherbartreestep-09-preferences">Preferences (<a href="https://github.etsycorp.com/bgreenlee/WeatherBar/tree/step-09-preferences">code</a>)</h2>
+<p><img src="assets/app-with-weather-view.png" alt="Running App with Weather View" /></p>
+
+<h2 id="preferences">Preferences</h2>
 
 <p>Having the city hard-coded in the app is not cool. Let’s make a Preferences pane so we can change it.</p>
 
-<p>Open up <strong>MainMenu.xib</strong> and drag another MenuItem onto the menu, above Quit, naming it “Preferences…”.</p>
+<p>Open up <em>MainMenu.xib</em> and drag another MenuItem onto the menu, above Quit, naming it “Preferences…”.</p>
 
-<p>Open up the Assistant editor again with StatusMenuController, and ctrl-drag from the Preferences menu item over to the code and create a “preferencesClicked” action.</p>
+<p>Open up the Assistant Editor again with <em>StatusMenuController</em>, and ctrl-drag from the Preferences menu item over to the code and create a “preferencesClicked” action (again with type <code>NSMenuItem</code>).</p>
 
-<p>New ⟶ File ⟶ Source ⟶ Cocoa Class. Call it “PreferencesWindow”, set the subclass to NSWindowController, and check the box to create a XIB file.</p>
+<p>New ⟶ File ⟶ OS X Source ⟶ Cocoa Class. Call it “PreferencesWindow”, set the subclass to NSWindowController, and check the box to create a XIB file. Save it.</p>
 
-<p>Give the window a title of Preferences. Add a label for “City:”, and put a Text Field to the right of it. It should look something like this:</p>
+<p>Click on <em>PreferencesWindow.xib</em>, and in the Attributes Inspector (⌥⌘4), give the window a title of Preferences. Add a label for “City:”, and put a Text Field to the right of it. It should look something like this:</p>
 
 <p><img src="assets/preferences.png" alt="" /></p>
 
 <p>Fancy!</p>
 
-<p>Bring up the Assistant editor with <strong>PreferencesWindow.swift</strong> and ctrl-drag from the text field to the code and create an outlet named “cityTextField”.</p>
+<p>Bring up the Assistant Editor with <em>PreferencesWindow.swift</em> and ctrl-drag from the text field to the code and create an outlet named “cityTextField”.</p>
 
 <p>In PreferencesWindow.swift, add:</p>
 
@@ -582,9 +698,32 @@ weatherMenuItem.view = weatherView
 <p>and at the end of <code>windowDidLoad()</code>, add:</p>
 
 <pre><code class="language-swift">self.window?.center()
+self.window?.makeKeyAndOrderFront(nil)
+NSApp.activateIgnoringOtherApps(true)
 </code></pre>
 
-<p>In <strong>StatusMenuController.swift</strong>, add a <code>preferencesWindow</code> class var:</p>
+<p>So <em>PreferencesWindow.swift</em> should look like:</p>
+
+<pre><code class="language-swift">import Cocoa
+
+class PreferencesWindow: NSWindowController {
+    @IBOutlet weak var cityTextField: NSTextField!
+
+    override var windowNibName : String! {
+        return "PreferencesWindow"
+    }
+
+    override func windowDidLoad() {
+        super.windowDidLoad()
+
+        self.window?.center()
+        self.window?.makeKeyAndOrderFront(nil)
+        NSApp.activateIgnoringOtherApps(true)
+    }
+}
+</code></pre>
+
+<p>In <em>StatusMenuController.swift</em>, add a <code>preferencesWindow</code> class var:</p>
 
 <pre><code class="language-swift">var preferencesWindow: PreferencesWindow!
 </code></pre>
@@ -611,38 +750,29 @@ weatherMenuItem.view = weatherView
 <p>and add:</p>
 
 <pre><code class="language-swift">func windowWillClose(notification: NSNotification) {
-    NSLog("city is: " + cityTextField.stringValue)
-}
-</code></pre>
-
-<p>If you run it now, you’ll see whatever you typed in the text field displayed when you close the window.</p>
-
-<p>Saving the value is easy:</p>
-
-<pre><code class="language-swift">func windowWillClose(notification: NSNotification) {
     let defaults = NSUserDefaults.standardUserDefaults()
     defaults.setValue(cityTextField.stringValue, forKey: "city")
 }
 </code></pre>
 
-<p>Now we need to notify the StatusMenuController that the preferences have been updated. For this we’ll use the Delegate pattern. This is easy, but requires a number of edits. First, at the top of PreferencesWindow.swift, add a <code>PreferencesWindowDelegate</code> protocol:</p>
+<p>Now we need to notify the <code>StatusMenuController</code> that the preferences have been updated. For this we’ll use the delegate pattern. This is easy, but requires a number of edits. First, at the top of PreferencesWindow.swift, add a <code>PreferencesWindowDelegate</code> protocol:</p>
 
 <pre><code class="language-swift">protocol PreferencesWindowDelegate {
     func preferencesDidUpdate()
 }
 </code></pre>
 
-<p>and add a <code>delegate</code> instance variable:</p>
+<p>and add a <code>delegate</code> instance variable to PreferencesWindow:</p>
 
 <pre><code class="language-swift">var delegate: PreferencesWindowDelegate?
 </code></pre>
 
-<p>At the end of <code>windowWillClose</code>, we’ll call the delegate:</p>
+<p>Also in PreferencesWindow, at the end of <code>windowWillClose</code>, we’ll call the delegate:</p>
 
 <pre><code class="language-swift">delegate?.preferencesDidUpdate()
 </code></pre>
 
-<p>Back in StatusMenuController, make it a <code>PreferencesWindowDelegate</code>:</p>
+<p>Back in StatusMenuController, make it a PreferencesWindowDelegate:</p>
 
 <pre><code class="language-swift">class StatusMenuController: NSObject, PreferencesWindowDelegate {
 </code></pre>
@@ -660,7 +790,7 @@ weatherMenuItem.view = weatherView
 preferencesWindow.delegate = self
 </code></pre>
 
-<p>All that’s left is to load the city from defaults. First add this at the top of StatusMenuController, under the imports:</p>
+<p>All that’s left is to load the city from defaults. First add this at the top of StatusMenuController, <strong>under the imports</strong>:</p>
 
 <pre><code class="language-swift">let DEFAULT_CITY = "Seattle, WA"
 </code></pre>
@@ -696,11 +826,13 @@ cityTextField.stringValue = city
 <ul>
   <li>Add other weather info (high/low temp, humidity, sunrise/sunset, etc) to the Weather View</li>
   <li>Change the status menu icon + title to reflect the current conditions</li>
+  <li>Add a timer to update the weather regularly (hint: <code>NSRunLoop.mainRunLoop().addTimer(refreshTimer!, forMode: NSRunLoopCommonModes)</code>).</li>
   <li>Make it so clicking on the Weather View opens a browser with detailed weather information (hint: <code>NSWorkspace.sharedWorkspace().openURL(url: NSURL)</code>). Note that since we’re using a custom view, the menu item isn’t highlighted when you mouse over it, so you’ll probably want to do something to make it obvious that it is clickable.</li>
   <li>Add some error handling. Right now if we get an unexpected response from the API, for example, bad things will happen.</li>
   <li><a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/testing_with_xcode/Introduction/Introduction.html#//apple_ref/doc/uid/TP40014132-CH1-SW1">Write some tests!</a></li>
   <li>Add an app icon. This isn’t hard, but it can be a pain creating the <a href="https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Optimizing/Optimizing.html">various sizes that Apple wants</a>. Fortunately, there are <a href="https://itunes.apple.com/us/app/asset-catalog-creator-app/id809625456?mt=12">tools to make this easier</a>.</li>
   <li>Add a preference to launch the app on login. I’ve used the <a href="https://github.com/Mozketo/LaunchAtLoginController">LaunchAtLoginController</a> library in other apps. There’s also <a href="http://bdunagan.com/2010/09/25/cocoa-tip-enabling-launch-on-startup/">this blog post</a>, if you want to try porting the code over to Swift.</li>
+  <li>Create an About window.</li>
 </ul>
 
 <h3 id="more-challenging">More Challenging</h3>
@@ -725,16 +857,18 @@ cityTextField.stringValue = city
 
 <p><strong><a href="http://www.raywenderlich.com/tutorials">Ray Wenderlich’s Tutorials</a></strong> - Puts this tutorial to shame.</p>
 
+<p><strong><a href="https://mikeash.com/pyblog/">Mike Ash’s NSBlog</a></strong> - Great deep dives into Objective-C and Swift</p>
+
 <h2 id="contact">Contact</h2>
 
-<p>Got questions, feedback, or corrections? <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#098;&#114;&#097;&#100;&#064;&#102;&#111;&#111;&#116;&#108;&#101;&#046;&#111;&#114;&#103;">Hit me up!</a> (You can also submit and <a href="https://github.etsycorp.com/bgreenlee/WeatherBar/issues">issue</a> or <a href="https://github.etsycorp.com/bgreenlee/WeatherBar/pulls">pull request</a>.)</p>
+<p>Got questions, feedback, or corrections? <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#098;&#114;&#097;&#100;&#064;&#102;&#111;&#111;&#116;&#108;&#101;&#046;&#111;&#114;&#103;">Hit me up!</a> (You can also submit and <a href="https://github.com/bgreenlee/WeatherBar/issues">issue</a> or <a href="https://github.com/bgreenlee/WeatherBar/pulls">pull request</a>.)</p>
 
 
         </section>
 
         <aside id="sidebar">
 
-          <p class="repo-owner"><a href="https://github.etsycorp.com/bgreenlee/WeatherBar">WeatherBar</a> is maintained by <a href="https://github.etsycorp.com/bgreenlee">bgreenlee</a>.</p>
+          <p class="repo-owner"><a href="http://github.com/bgreenlee/WeatherBar">WeatherBar</a> is maintained by <a href="http://footle.org">bgreenlee</a>.</p>
 
           <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
         </aside>
