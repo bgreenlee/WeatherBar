@@ -2,8 +2,8 @@
 //  WeatherView.swift
 //  WeatherBar
 //
-//  Created by Brad Greenlee on 3/19/15.
-//  Copyright (c) 2015 Etsy. All rights reserved.
+//  Created by Brad Greenlee on 10/13/15.
+//  Copyright © 2015 Etsy. All rights reserved.
 //
 
 import Cocoa

@@ -2,12 +2,12 @@
 //  WeatherBarTests.swift
 //  WeatherBarTests
 //
-//  Created by Brad Greenlee on 3/19/15.
-//  Copyright (c) 2015 Etsy. All rights reserved.
+//  Created by Brad Greenlee on 10/10/15.
+//  Copyright © 2015 Etsy. All rights reserved.
 //
 
-import Cocoa
 import XCTest
+@testable import WeatherBar
 
 class WeatherBarTests: XCTestCase {
     
@@ -23,12 +23,12 @@ class WeatherBarTests: XCTestCase {
     
     func testExample() {
         // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measureBlock {
             // Put the code you want to measure the time of here.
         }
     }

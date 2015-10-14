@@ -2,8 +2,8 @@
 //  PreferencesWindow.swift
 //  WeatherBar
 //
-//  Created by Brad Greenlee on 3/20/15.
-//  Copyright (c) 2015 Etsy. All rights reserved.
+//  Created by Brad Greenlee on 10/13/15.
+//  Copyright © 2015 Etsy. All rights reserved.
 //
 
 import Cocoa
@@ -13,24 +13,23 @@ protocol PreferencesWindowDelegate {
 }
 
 class PreferencesWindow: NSWindowController, NSWindowDelegate {
-
-    @IBOutlet weak var cityTextField: NSTextField!
     var delegate: PreferencesWindowDelegate?
-    
+    @IBOutlet weak var cityTextField: NSTextField!
+
     override var windowNibName : String! {
         return "PreferencesWindow"
     }
-
+    
     override func windowDidLoad() {
         super.windowDidLoad()
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let city = defaults.stringForKey("city") ?? DEFAULT_CITY
-        cityTextField.stringValue = city
 
         self.window?.center()
         self.window?.makeKeyAndOrderFront(nil)
         NSApp.activateIgnoringOtherApps(true)
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let city = defaults.stringForKey("city") ?? DEFAULT_CITY
+        cityTextField.stringValue = city
     }
     
     func windowWillClose(notification: NSNotification) {
@@ -38,5 +37,4 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
         defaults.setValue(cityTextField.stringValue, forKey: "city")
         delegate?.preferencesDidUpdate()
     }
-    
 }

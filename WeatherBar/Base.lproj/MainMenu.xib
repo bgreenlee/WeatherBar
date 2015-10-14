@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -13,71 +13,70 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="WeatherBar" customModuleProvider="target"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-        <customObject id="E63-qH-n1m" userLabel="StatusMenuController" customClass="StatusMenuController" customModule="WeatherBar" customModuleProvider="target">
+        <customObject id="sS3-a3-GGc" userLabel="StatusMenuController" customClass="StatusMenuController" customModule="WeatherBar" customModuleProvider="target">
             <connections>
-                <outlet property="statusMenu" destination="5zQ-rZ-NDc" id="cQi-Rx-ooj"/>
-                <outlet property="weatherView" destination="4ZI-gd-R3g" id="Wt2-EK-1Nq"/>
+                <outlet property="statusMenu" destination="qZp-Ad-uDX" id="XFG-js-aKj"/>
+                <outlet property="weatherView" destination="HhN-DY-IST" id="hvL-Yk-HVZ"/>
             </connections>
         </customObject>
-        <menu id="5zQ-rZ-NDc">
+        <menu id="qZp-Ad-uDX">
             <items>
-                <menuItem title="Update" id="9YQ-9R-ngI">
+                <menuItem title="Update" id="CyZ-K7-RM6">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="updateClicked:" target="E63-qH-n1m" id="g09-eC-ibL"/>
+                        <action selector="updateClicked:" target="sS3-a3-GGc" id="fiK-uK-iuP"/>
                     </connections>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="6qN-Yt-zzc"/>
-                <menuItem title="Weather" id="H9M-XX-LCv">
+                <menuItem isSeparatorItem="YES" id="9Bi-wd-Y5L"/>
+                <menuItem title="Weather" id="d2M-wS-o1T">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="ZEe-TS-Imw"/>
-                <menuItem title="Preferences..." id="Gnf-FV-JqN">
-                    <modifierMask key="keyEquivalentModifierMask"/>
+                <menuItem isSeparatorItem="YES" id="nf3-SP-UCH"/>
+                <menuItem title="Preferences..." id="gjQ-IK-ro7">
                     <connections>
-                        <action selector="preferencesClicked:" target="E63-qH-n1m" id="qrz-zI-ukQ"/>
+                        <action selector="preferencesClicked:" target="sS3-a3-GGc" id="iUp-2D-yeF"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Quit" id="6T6-uD-0eI">
+                <menuItem title="Quit" id="k4N-2W-XAy">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="quitClicked:" target="E63-qH-n1m" id="rqb-nY-8Z4"/>
+                        <action selector="quitClicked:" target="sS3-a3-GGc" id="Eue-jt-z1Q"/>
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="237" y="367.5"/>
+            <point key="canvasLocation" x="-104.5" y="214.5"/>
         </menu>
-        <customView id="4ZI-gd-R3g" customClass="WeatherView" customModule="WeatherBar" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="265" height="50"/>
+        <customView id="HhN-DY-IST" customClass="WeatherView" customModule="WeatherBar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="265" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E1D-6m-uwT">
-                    <rect key="frame" x="76" y="33" width="169" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="City" id="XMg-q6-8fj">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-mb-kdd">
-                    <rect key="frame" x="76" y="8" width="167" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Current Conditions" id="CVa-Cn-tT8">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N8G-HB-m9F">
-                    <rect key="frame" x="20" y="0.0" width="50" height="50"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Neu-W8-ZlC"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="niq-hJ-JPc">
+                    <rect key="frame" x="20" y="22" width="50" height="50"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Iot-v5-CTs"/>
                 </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZIn-wH-cUL">
+                    <rect key="frame" x="80" y="55" width="178" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="City" id="LHl-t2-t4z">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BAj-OW-50m">
+                    <rect key="frame" x="80" y="30" width="179" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tempurature and Conditions" id="k04-hM-Q9o">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <connections>
-                <outlet property="cityTextField" destination="E1D-6m-uwT" id="G0L-dt-jO5"/>
-                <outlet property="currentConditionsTextField" destination="wfM-mb-kdd" id="QiO-WB-nng"/>
-                <outlet property="imageView" destination="N8G-HB-m9F" id="2QF-Wc-Hx4"/>
+                <outlet property="cityTextField" destination="ZIn-wH-cUL" id="5I9-n3-gEe"/>
+                <outlet property="currentConditionsTextField" destination="BAj-OW-50m" id="Xfx-Ct-KNa"/>
+                <outlet property="imageView" destination="niq-hJ-JPc" id="vKl-jS-MuE"/>
             </connections>
-            <point key="canvasLocation" x="367.5" y="525"/>
+            <point key="canvasLocation" x="-37.5" y="368"/>
         </customView>
     </objects>
 </document>
