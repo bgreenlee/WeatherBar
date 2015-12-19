@@ -555,14 +555,14 @@ class StatusMenuController: NSObject {
 
 <p>With the relatively recent introduction of blocks to Objective-C, and Swift’s first-class functions, a simpler way is to use callbacks. (If you implemented the delegate changes above, go ahead and back them out first.)</p>
 
-<p>First, let’s change the function definition of <code>fetchWeather</code> to accept a callback function:</p>
+<p>First, let’s change the function definition of the <code>fetchWeather</code> method in <em>WeatherAPI.swift</em> to accept a callback function:</p>
 
 <pre><code class="language-swift">func fetchWeather(query: String, success: (Weather) -&gt; Void) {
 </code></pre>
 
 <p>This says we expect a function which takes a Weather object as a parameter and returns nothing (Void).</p>
 
-<p>Change the data-fetching task in the <code>fetchWeather</code> method in <em>WeatherAPI.swift</em> to look like this (line 12):</p>
+<p>Change the data-fetching task in<code>fetchWeather</code> to look like this (line 12):</p>
 
 <div class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="lineno"> 1</span> <span class="k">let</span> <span class="n">task</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">dataTaskWithURL</span><span class="p">(</span><span class="n">url</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
 <span class="lineno"> 2</span>     <span class="c1">// first check for a hard error</span>

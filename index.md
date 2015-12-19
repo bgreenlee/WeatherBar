@@ -550,7 +550,7 @@ class StatusMenuController: NSObject, WeatherAPIDelegate {
 
 With the relatively recent introduction of blocks to Objective-C, and Swift's first-class functions, a simpler way is to use callbacks. (If you implemented the delegate changes above, go ahead and back them out first.)
 
-First, let's change the function definition of `fetchWeather` to accept a callback function:
+First, let's change the function definition of the `fetchWeather` method in _WeatherAPI.swift_ to accept a callback function:
 
 ~~~ swift
 func fetchWeather(query: String, success: (Weather) -> Void) {
@@ -558,7 +558,7 @@ func fetchWeather(query: String, success: (Weather) -> Void) {
 
 This says we expect a function which takes a Weather object as a parameter and returns nothing (Void).
 
-Change the data-fetching task in the `fetchWeather` method in _WeatherAPI.swift_ to look like this (line 12):
+Change the data-fetching task in`fetchWeather` to look like this (line 12):
 
 {% highlight swift linenos %}
 let task = session.dataTaskWithURL(url!) { data, response, error in
