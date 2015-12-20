@@ -230,7 +230,7 @@ Now, when the application is launched and the _MainMenu.xib_ is instantiated, ou
 
 Run it again to make sure it still works.
 
-## Step 3: Calling the API
+## Calling the API
 
 Time to get some actual weather data. We're going to use [OpenWeatherMap](http://openweathermap.org/). You'll need to [create an account](http://home.openweathermap.org/users/sign_up) to get your free API key.
 
@@ -294,7 +294,29 @@ and in `updateClicked`, add:
 weatherAPI.fetchWeather("Seattle")
 ~~~
 
-Run it, and select Update. You should see the JSON response in the console.
+Run it, and select Update. If you are running OS X 10.11 (El Capitan) or later, you will see an error in your console: `The resource could not be loaded because the App Transport Security policy requires the use of a secure connection.` This is because OpenWeatherMap only provides (as of this writing) a non-SSL (http) endpoint, and El Capitan introduced a security measure that prevents connections to non-SSL endpoints without an explicit exception. To get past this, we need to add the exception to our _Info.plist_ file.
+
+This will be easier to do (and explain) by editing the raw XML of the _Info.plist_ file directly, instead of using the properties editor. So *right-click* on _Info.plist_ and select Open As ⟶ Source Code:
+
+![Open Info.plist as Source Code](assets/Info-plist-open-as-source.png)
+
+At the bottom, before the last `</dict>`, add:
+
+~~~ xml
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSExceptionDomains</key>
+    <dict>
+        <key>api.openweathermap.org</key>
+        <dict>
+            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+        </dict>
+    </dict>
+</dict>
+~~~
+
+Save, run again, and select Update. You should see the JSON response in the console.
 
 Now, you probably want it to fetch the weather as soon as the app launches. Let's reorganize `StatusMenuController` a bit, adding an `updateWeather` method. Here's what it looks like now:
 

@@ -253,7 +253,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 <p>Run it again to make sure it still works.</p>
 
-<h2 id="step-3-calling-the-api">Step 3: Calling the API</h2>
+<h2 id="calling-the-api">Calling the API</h2>
 
 <p>Time to get some actual weather data. We’re going to use <a href="http://openweathermap.org/">OpenWeatherMap</a>. You’ll need to <a href="http://home.openweathermap.org/users/sign_up">create an account</a> to get your free API key.</p>
 
@@ -314,7 +314,28 @@ class WeatherAPI {
 <pre><code class="language-swift">weatherAPI.fetchWeather("Seattle")
 </code></pre>
 
-<p>Run it, and select Update. You should see the JSON response in the console.</p>
+<p>Run it, and select Update. If you are running OS X 10.11 (El Capitan) or later, you will see an error in your console: <code>The resource could not be loaded because the App Transport Security policy requires the use of a secure connection.</code> This is because OpenWeatherMap only provides (as of this writing) a non-SSL (http) endpoint, and El Capitan introduced a security measure that prevents connections to non-SSL endpoints without an explicit exception. To get past this, we need to add the exception to our <em>Info.plist</em> file.</p>
+
+<p>This will be easier to do (and explain) by editing the raw XML of the <em>Info.plist</em> file directly, instead of using the properties editor. So <em>right-click</em> on <em>Info.plist</em> and select Open As ⟶ Source Code:</p>
+
+<p><img src="assets/Info-plist-open-as-source.png" alt="Open Info.plist as Source Code" /></p>
+
+<p>At the bottom, before the last <code>&lt;/dict&gt;</code>, add:</p>
+
+<pre><code class="language-xml">&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+    &lt;key&gt;NSExceptionDomains&lt;/key&gt;
+    &lt;dict&gt;
+        &lt;key&gt;api.openweathermap.org&lt;/key&gt;
+        &lt;dict&gt;
+            &lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+            &lt;true/&gt;
+        &lt;/dict&gt;
+    &lt;/dict&gt;
+&lt;/dict&gt;
+</code></pre>
+
+<p>Save, run again, and select Update. You should see the JSON response in the console.</p>
 
 <p>Now, you probably want it to fetch the weather as soon as the app launches. Let’s reorganize <code>StatusMenuController</code> a bit, adding an <code>updateWeather</code> method. Here’s what it looks like now:</p>
 
