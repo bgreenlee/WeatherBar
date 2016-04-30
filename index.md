@@ -250,7 +250,7 @@ class WeatherAPI {
         // url-escape the query string we're passed
         let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         let url = NSURL(string: "\(BASE_URL)?APPID=\(API_KEY)&units=imperial&q=\(escapedQuery!)")
-        let task = session.dataTaskWithURL(url!) { data, response, error in
+        let task = session.dataTaskWithURL(url!) { data, response, err in
             // first check for a hard error
             if let error = err {
                 NSLog("weather api error: \(error)")
