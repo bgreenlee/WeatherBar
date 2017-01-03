@@ -25,15 +25,15 @@ class PreferencesWindow: NSWindowController, NSWindowDelegate {
 
         self.window?.center()
         self.window?.makeKeyAndOrderFront(nil)
-        NSApp.activateIgnoringOtherApps(true)
+        NSApp.activate(ignoringOtherApps: true)
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let city = defaults.stringForKey("city") ?? DEFAULT_CITY
+        let defaults = UserDefaults.standard
+        let city = defaults.string(forKey: "city") ?? DEFAULT_CITY
         cityTextField.stringValue = city
     }
     
-    func windowWillClose(notification: NSNotification) {
-        let defaults = NSUserDefaults.standardUserDefaults()
+    func windowWillClose(_ notification: Notification) {
+        let defaults = UserDefaults.standard
         defaults.setValue(cityTextField.stringValue, forKey: "city")
         delegate?.preferencesDidUpdate()
     }
