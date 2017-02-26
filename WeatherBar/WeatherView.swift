@@ -13,9 +13,9 @@ class WeatherView: NSView {
     @IBOutlet weak var cityTextField: NSTextField!
     @IBOutlet weak var currentConditionsTextField: NSTextField!
     
-    func update(weather: Weather) {
+    func update(_ weather: Weather) {
         // do UI updates on the main thread
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             self.cityTextField.stringValue = weather.city
             self.currentConditionsTextField.stringValue = "\(Int(weather.currentTemp))°F and \(weather.conditions)"
             self.imageView.image = NSImage(named: weather.icon)

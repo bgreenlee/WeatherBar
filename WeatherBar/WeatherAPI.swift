@@ -23,19 +23,19 @@ class WeatherAPI {
     let API_KEY = "your-api-key-here"
     let BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
     
-    func fetchWeather(query: String, success: (Weather) -> Void) {
-        let session = NSURLSession.sharedSession()
+    func fetchWeather(_ query: String, success: @escaping (Weather) -> Void) {
+        let session = URLSession.shared
         // url-escape the query string we're passed
-        let escapedQuery = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-        let url = NSURL(string: "\(BASE_URL)?APPID=\(API_KEY)&units=imperial&q=\(escapedQuery!)")
-        let task = session.dataTaskWithURL(url!) { data, response, err in
+        let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        let url = URL(string: "\(BASE_URL)?APPID=\(API_KEY)&units=imperial&q=\(escapedQuery!)")
+        let task = session.dataTask(with: url!, completionHandler: { data, response, err in
             // first check for a hard error
             if let error = err {
                 NSLog("weather api error: \(error)")
             }
 
             // then check the response code
-            if let httpResponse = response as? NSHTTPURLResponse {
+            if let httpResponse = response as? HTTPURLResponse {
                 switch httpResponse.statusCode {
                 case 200: // all good!
                     if let weather = self.weatherFromJSONData(data!) {
@@ -44,19 +44,19 @@ class WeatherAPI {
                 case 401: // unauthorized
                     NSLog("weather api returned an 'unauthorized' response. Did you set your API key?")
                 default:
-                    NSLog("weather api returned response: %d %@", httpResponse.statusCode, NSHTTPURLResponse.localizedStringForStatusCode(httpResponse.statusCode))
+                    NSLog("weather api returned response: %d %@", httpResponse.statusCode, HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
                 }
             }
-        }
+        }) 
         task.resume()
     }
     
-    func weatherFromJSONData(data: NSData) -> Weather? {
+    func weatherFromJSONData(_ data: Data) -> Weather? {
         typealias JSONDict = [String:AnyObject]
         let json : JSONDict
         
         do {
-            json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! JSONDict
+            json = try JSONSerialization.jsonObject(with: data, options: []) as! JSONDict
         } catch {
             NSLog("JSON parsing failed: \(error)")
             return nil
