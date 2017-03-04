@@ -28,7 +28,7 @@ class WeatherAPI {
         // url-escape the query string we're passed
         let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let url = URL(string: "\(BASE_URL)?APPID=\(API_KEY)&units=imperial&q=\(escapedQuery!)")
-        let task = session.dataTask(with: url!, completionHandler: { data, response, err in
+        let task = session.dataTask(with: url!) { data, response, err in
             // first check for a hard error
             if let error = err {
                 NSLog("weather api error: \(error)")
@@ -47,7 +47,7 @@ class WeatherAPI {
                     NSLog("weather api returned response: %d %@", httpResponse.statusCode, HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
                 }
             }
-        }) 
+        }
         task.resume()
     }
     
