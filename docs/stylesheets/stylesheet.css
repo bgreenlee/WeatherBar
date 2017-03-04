@@ -164,24 +164,10 @@ code, pre {
   font-size: 13px;
 }
 
-code {
-  background-color: #f2f8fc;
-  border: solid 1px #dbe7f3;
-  padding: 0 3px;
-}
-
 pre {
-  padding: 20px;
-  background: #fff;
   text-shadow: none;
   overflow: auto;
-  border: solid 1px #f2f2f2;
-}
-pre code {
-  color: #2879d0;
-  background-color: #fff;
-  border: none;
-  padding: 0;
+  border: solid 1px #ccc;
 }
 
 ul, ol, dl {
