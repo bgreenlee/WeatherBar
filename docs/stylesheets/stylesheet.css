@@ -504,10 +504,6 @@ pre {
   padding: 10px;
 }
 
-pre, code.hljs {
-  background: #3f3f4f;
-}
-
 code, pre {
   margin-bottom: 0;
 }
