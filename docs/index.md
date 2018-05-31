@@ -46,7 +46,7 @@ Under Objects, delete the default window and menu.
 
 ![Delete main menu and default window](assets/window-menu-delete.png)
 
-Note: if you don't Main Menu and Window in the second pane from the left, make that pane wider by dragging the right side of it to the right.
+Note: if you don't see Main Menu and Window in the second pane from the left, make that pane wider by dragging the right side of it to the right.
 
 Go to the Object Library (right-hand pane, on the bottom; if it isn't showing, go to the menu item View ⟶ Utilities ⟶ Show Object Library, or hit ⌃⌥⌘3). Type "menu" and drag a *Menu* object over to your Objects list, under Font Manager.
 
